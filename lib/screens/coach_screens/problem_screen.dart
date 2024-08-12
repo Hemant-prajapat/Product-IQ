@@ -10,24 +10,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/answer.dart';
 import '../../routes/app_route_consts.dart';
+
 class ProblemScreen extends StatefulWidget {
-  ProblemScreen({super.key, required this.problemTitle,
-    required this.problem,
-    required this.problemId,
-    required this.moduleId,
-    required this.appId});
+  ProblemScreen(
+      {super.key,
+      required this.problemTitle,
+      required this.problem,
+      required this.problemId,
+      required this.moduleId,
+      required this.appId});
 
   final String moduleId;
   final int appId;
   String problemTitle;
-   Map<String,dynamic> problem;
-   String problemId;
+  Map<String, dynamic> problem;
+  String problemId;
   @override
   _ProblemScreenState createState() => _ProblemScreenState();
 }
-// class ProblemScreen extends StatelessWidget {
-  class _ProblemScreenState extends State<ProblemScreen> {
 
+// class ProblemScreen extends StatelessWidget {
+class _ProblemScreenState extends State<ProblemScreen> {
   // const ProblemScreen({super.key, required this.problemTitle, required this.problem, required this.problemId, required this.moduleId, required this.appId});
 
   // late String problemTitle;
@@ -37,7 +40,6 @@ class ProblemScreen extends StatefulWidget {
   // late String moduleId;
   // late int appId;
   var isLoading = false;
-
 
   void _fetchPreviousAnswer() async {
     // fetch previous answer
@@ -50,18 +52,21 @@ class ProblemScreen extends StatefulWidget {
     final previousAnswerUrl = Uri.parse(
         '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.problem['labelId']}/all');
     http.Response response =
-    await http.get(previousAnswerUrl, headers: MyConsts.requestHeader);
+        await http.get(previousAnswerUrl, headers: MyConsts.requestHeader);
     if (response.statusCode == 200) {
       final res = jsonDecode(response.body);
-      debugPrint(res.toString());
+      debugPrint( "tester previous answer "+res.toString());
       List<Answer> previousAnswers = [];
       for (var obj in res) {
         previousAnswers.add(Answer.fromJson(obj));
       }
+
+      previousAnswers = previousAnswers.reversed.toList();
       if (previousAnswers.isEmpty) {
         setState(() {
           isLoading = false;
         });
+
         _showSnackBarMessage('No previous answer found');
       } else {
         setState(() {
@@ -85,6 +90,7 @@ class ProblemScreen extends StatefulWidget {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
   }
+
   @override
   Widget build(BuildContext context) {
     print("problem is $widget.problem");
@@ -123,16 +129,27 @@ class ProblemScreen extends StatefulWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  widget.problem['companyLogo']=='1' || widget.problem['companyLogo'] == null ? SizedBox.shrink(): Image.network("${MyConsts.imageUrl}${widget.problem['companyLogo']}",height: 35,width: 35,),
-                                  SizedBox(width: 10,),
+                                  widget.problem['companyLogo'] == '1' ||
+                                          widget.problem['companyLogo'] == null
+                                      ? SizedBox.shrink()
+                                      : Image.network(
+                                          "${MyConsts.imageUrl}${widget.problem['companyLogo']}",
+                                          height: 35,
+                                          width: 35,
+                                        ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     widget.problemTitle,
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                   ),
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
+                                padding:
+                                    const EdgeInsets.fromLTRB(40, 20, 40, 0),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Column(
@@ -143,20 +160,22 @@ class ProblemScreen extends StatefulWidget {
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyLarge!
-                                            .copyWith(fontSize: 16, height: 1.2),
+                                            .copyWith(
+                                                fontSize: 16, height: 1.2),
                                       ),
                                       Divider(
-                                        color: MyConsts.bgColor.withOpacity(0.5),
+                                        color:
+                                            MyConsts.bgColor.withOpacity(0.5),
                                         thickness: 2,
-                                      ).paddingOnly(top: 5,bottom: 5),
-
+                                      ).paddingOnly(top: 5, bottom: 5),
                                       Text(
                                         widget.problem['level_question']!,
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyLarge!
-                                            .copyWith(fontSize: 16, height: 1.2),
+                                            .copyWith(
+                                                fontSize: 16, height: 1.2),
                                       ),
                                     ],
                                   ),
@@ -182,7 +201,17 @@ class ProblemScreen extends StatefulWidget {
                       child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 30),
-                          child: InputAnswerBox(conceptList: widget.problem['topics'] ,completedPercent: widget.problem['completedPercent']!,hint: widget.problem['levelHint']!,sampleAnswer: widget.problem['sampleAnswer']!,totalPercent:widget.problem['totalPercent']! ,labelId: widget.problemId, moduleId: widget.moduleId, appId: widget.appId,)),
+                          child: InputAnswerBox(
+                            conceptList: widget.problem['topics'],
+                            completedPercent:
+                                widget.problem['completedPercent']!,
+                            hint: widget.problem['levelHint']!,
+                            sampleAnswer: widget.problem['sampleAnswer']!,
+                            totalPercent: widget.problem['totalPercent']!,
+                            labelId: widget.problemId,
+                            moduleId: widget.moduleId,
+                            appId: widget.appId,
+                          )),
                     )
                   ],
                 ),
@@ -196,7 +225,7 @@ class ProblemScreen extends StatefulWidget {
                       color: Colors.white,
                     ),
                     onPressed: () {
-Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                   )),
               Positioned(

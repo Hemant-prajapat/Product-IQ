@@ -60,8 +60,8 @@ class ProductSalesScreen extends StatelessWidget {
                         index == 1
                             ? MyConsts.coachBulbPoints[0]
                             : index == 2
-                                ? MyConsts.interviewBulbPoints[0]
-                                : index == 3 ? MyConsts.iqWorktoolsBulbPoints[0] :MyConsts.iqBulbPoints[0]  ,
+                                ? MyConsts.iqWorktoolsBulbPoints[0]
+                                : index == 3 ? MyConsts.interviewBulbPoints[0] :MyConsts.iqBulbPoints[0]  ,
                         style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w900,color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -76,8 +76,8 @@ class ProductSalesScreen extends StatelessWidget {
                               index == 1
                                   ? MyConsts.coachBulbPoints[i]
                                   : index == 2
-                                      ? MyConsts.interviewBulbPoints[i]
-                                      : index == 3 ? MyConsts.iqWorktoolsBulbPoints[i] : MyConsts.iqBulbPoints[i],
+                                      ? MyConsts.iqWorktoolsBulbPoints[i]
+                                      : index == 3 ? MyConsts.interviewBulbPoints[i] : MyConsts.iqBulbPoints[i],
                             ),
                           ),
                       ],
@@ -117,9 +117,9 @@ class ProductSalesScreen extends StatelessWidget {
                         index == 1
                             ? MyConsts.coachTickPoints[i]
                             : index == 2
-                                ? MyConsts.interviewTickPoints[i]
+                                ? MyConsts.iqWorktoolsTickPoints[i]
                                 : index == 3
-                            ? MyConsts.iqWorktoolsTickPoints[i]
+                            ? MyConsts.interviewTickPoints[i]
                             : MyConsts.iqTickPoints[i],
                       ),
                     ),

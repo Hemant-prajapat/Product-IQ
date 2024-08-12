@@ -11,6 +11,7 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("product type is $productType");
     final int pid = MyConsts.appTypes.indexOf(productType);
     final deviceWidth = MediaQuery.of(context).size.width;
     return Card(

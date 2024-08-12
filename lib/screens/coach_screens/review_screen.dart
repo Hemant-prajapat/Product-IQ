@@ -27,9 +27,6 @@ class ReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    print("completed percent ===  $completedPercent");
-    print("completed percent ===  ${((int.parse(completedPercent)+1)/int.parse(totalPercent)).toPrecision(2)}");
     final bool isPrevious = answers.length > 2;
     final deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -155,16 +152,23 @@ class ReviewScreen extends StatelessWidget {
                           size: 18, color: Colors.white),
                     ],
                   ),
-                  onTap: () async{
-
-                    SharedPreferences preferences =await  SharedPreferences.getInstance();
+                  onTap: () async {
+                    SharedPreferences preferences =
+                        await SharedPreferences.getInstance();
                     print("token is ------${preferences.getString("token")!}");
                     GoRouter.of(context).goNamed(
                         MyAppRouteConst.coachModulesInfoRoute,
-                        extra:    completedPercent==totalPercent? ((int.parse(completedPercent))/int.parse(totalPercent)).toPrecision(2):((int.parse(completedPercent)+1)/int.parse(totalPercent)).toPrecision(2),
+                        extra: completedPercent == totalPercent
+                            ? ((int.parse(completedPercent)) /
+                                    int.parse(totalPercent))
+                                .toPrecision(2)
+                            : ((int.parse(completedPercent) + 1) /
+                                    int.parse(totalPercent))
+                                .toPrecision(2),
                         pathParameters: {
-                          'completedPercent':(int.parse(completedPercent)+1).toString(),
-                          'totalPercent':totalPercent,
+                          'completedPercent':
+                              (int.parse(completedPercent) + 1).toString(),
+                          'totalPercent': totalPercent,
                           'appId': '$appId',
                           'id': MyConsts.moduleId,
                           'moduleTitle': MyConsts.moduleName

@@ -6,7 +6,11 @@ import 'package:product_iq/consts.dart';
 import '../../models/answer.dart';
 
 class YourAnswerBox extends StatefulWidget {
-  const YourAnswerBox({super.key, this.userAnswer = MyConsts.dummyText,required this.isPrevious,required this.answerRating});
+  const YourAnswerBox(
+      {super.key,
+      this.userAnswer = MyConsts.dummyText,
+      required this.isPrevious,
+      required this.answerRating});
 
   final String userAnswer;
   final bool isPrevious;
@@ -21,9 +25,10 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.isPrevious){
+    if (widget.isPrevious) {
       print("previours answer -----${widget.answerRating.toJson()}");
-    }else{
+      print("rating -----${widget.answerRating.evaluationResult}");
+    } else {
       print("real answer -----${widget.answerRating.toJson()}");
     }
     Color getColorByRating(double rating) {
@@ -41,10 +46,10 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
     debugPrint(
         "${widget.answerRating.evaluationResult} & ${widget.answerRating.evalutionResult}");
     if (widget.answerRating.evaluationResult!.isNotEmpty) {
-      print("rating sdfasf--${widget.answerRating.evalutionResult! }");
-      rating = 4.0/*double.parse(widget.answerRating.evaluationResult!)*/;
+      // print("rating sdfasf--${widget.answerRating.evalutionResult! }");
+      rating = /*4.0*/ double.parse(widget.answerRating.evaluationResult!);
     } else {
-      rating =  double.parse(widget.answerRating.evalutionResult!);
+      rating = double.parse(widget.answerRating.evalutionResult!);
     }
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
@@ -57,33 +62,45 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
         child: Column(
           children: [
             Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                widget.isPrevious? Container(width: 45,height: 23,decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  
-                ),
-                alignment: Alignment.center,
-                  child: Text("$rating/10",style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 11,
-                      color:getColorByRating(0.1) ,
-                      fontWeight: FontWeight.w700),),
-                ) : Text(
-                  " Your Answer",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 14,
-                      color: MyConsts.primaryDark,
-                      fontWeight: FontWeight.w700),
-                ),
+                widget.isPrevious
+                    ? Container(
+                        width: 45,
+                        height: 23,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "$rating/10",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  fontSize: 11,
+                                  color: getColorByRating(rating / 10),
+                                  fontWeight: FontWeight.w700),
+                        ),
+                      )
+                    : Text(
+                        " Your Answer",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(
+                                fontSize: 14,
+                                color: MyConsts.primaryDark,
+                                fontWeight: FontWeight.w700),
+                      ),
                 Text(
-                  "14 July 2024",
+                  "",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontSize: 12,
                       color: MyConsts.primaryDark,
                       fontWeight: FontWeight.w500),
                 ),
-
               ],
             ),
             const SizedBox(

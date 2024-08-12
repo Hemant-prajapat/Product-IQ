@@ -39,7 +39,7 @@ class _MainSalesScreenState extends State<MainSalesScreen> {
 
   void startAutoScroll() {
     timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      int nextPage = (currentIndex + 1) % 4;
+      int nextPage = (currentIndex + 1) % 5;
       _pageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 300),

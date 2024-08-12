@@ -11,8 +11,8 @@ String answerToJson(Answer data) => json.encode(data.toJson());
 class Answer {
   final String answer;
   final Result result;
-  final String? evaluationResult;
-  final String? evalutionResult;
+   String? evaluationResult;
+  String? evalutionResult;
 
   Answer({
     required this.answer,
@@ -22,17 +22,17 @@ class Answer {
   });
 
   factory Answer.fromJson(Map<String, dynamic> json) => Answer(
-    answer: json["answer"],
-    result: Result.fromJson(json["result"]),
-    evalutionResult: json["evalution_result"].toString(),
-    evaluationResult: json["evaluation_result"].toString(),
-  );
+        answer: json["answer"],
+        result: Result.fromJson(json["result"]),
+        evalutionResult: json["evalution_result"].toString(),
+        evaluationResult: json["evaluation_result"].toString(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "answer": answer,
-    "result": result.toJson(),
-    "evalution_result": evalutionResult,
-  };
+        "answer": answer,
+        "result": result.toJson(),
+        "evalution_result": evalutionResult,
+      };
 }
 
 class Result {
@@ -47,14 +47,16 @@ class Result {
   });
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
-    names: List<String>.from(json["names"].map((x) => x)),
-    scores: List<String>.from(json["scores"].map((x) => x.toString())),
-    suggestionsReport: List<String>.from(json["suggestions_report"].map((x) => x)),
-  );
+        names: List<String>.from(json["names"].map((x) => x)),
+        scores: List<String>.from(json["scores"].map((x) => x.toString())),
+        suggestionsReport:
+            List<String>.from(json["suggestions_report"].map((x) => x)),
+      );
 
   Map<String, dynamic> toJson() => {
-    "names": List<dynamic>.from(names.map((x) => x)),
-    "scores": List<dynamic>.from(scores.map((x) => x.toString())),
-    "suggestions_report": List<dynamic>.from(suggestionsReport.map((x) => x)),
-  };
+        "names": List<dynamic>.from(names.map((x) => x)),
+        "scores": List<dynamic>.from(scores.map((x) => x.toString())),
+        "suggestions_report":
+            List<dynamic>.from(suggestionsReport.map((x) => x)),
+      };
 }

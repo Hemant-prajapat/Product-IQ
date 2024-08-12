@@ -214,9 +214,10 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
     final postAnswerUrl = Uri.parse(
         '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.labelId}');
     debugPrint(widget.labelId);
+
     http.Response response = await http.post(postAnswerUrl,
         headers: MyConsts.requestHeader, body: json.encode({'answer': answer}));
-    print("response of answer${response.body}");
+    print("response of answer '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.labelId}'");
     final res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       debugPrint(res.toString());
@@ -225,6 +226,9 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
 
         if (res['previous'] != null) {
           previousAnswer = Answer.fromJson(res['previous']);
+          print("hemant is answer ${res['previous']}");
+          // previousAnswer!.evalutionResult = null;
+          previousAnswer!.evaluationResult = res['previous']['evalution_result'].toString();
         }
         isSubmitting = false;
       });
@@ -392,6 +396,8 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
             children: [
               InkWell(
                 onTap: () async{
+
+                  if(_answerController.text.isNotEmpty){
                   setState(() {
                     isSave = true;
                   });
@@ -400,6 +406,9 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                   setState(() {
                     isSave = false;
                   });
+                  }else{
+                    _showSnackBarMessage("Please enter your answer");
+                  }
                 },
                 child: Container(
                     width: MediaQuery.of(context).size.width * 35 / 100,

@@ -10,9 +10,9 @@ static const iqIndustryColor = Color(0xFF082AA8);
   static const freeText = "GET FOR FREE";
   static final productName = [
     "Product Industry Trainer",
-    "PRODUCT Interview Coach",
     "PRODUCT WorkTools",
-    "Product Flash Tutor"
+    "Product Flash Tutor",
+    "PRODUCT Interview Coach"
   ];
   static final productNameMap = {
     1: "Product Industry Trainer",
@@ -187,10 +187,9 @@ static const iqIndustryColor = Color(0xFF082AA8);
   static const primaryColorTo = Color(0xFF514ED7);
   static const productColors = [
     [Color(0xFF3629B7), Color(0xFF3629B7)],
-    [Color(0xFF082AA8), Color(0xFF082AA8)],
-    [Color(0xFF5A31BD), Color(0xFF5A31BD)],
-    //background: #998EFF;
+    [Color(0xFF998EFF), Color(0xFF998EFF)],
     [Color(0xFF73D2F2), Color(0xFF02A8E0)],
+    [Color(0xFF082AA8), Color(0xFF082AA8)],
   ];
   static const productimage = [
     "assets/elements/coach.svg",
