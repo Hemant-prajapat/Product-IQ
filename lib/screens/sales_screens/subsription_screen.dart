@@ -66,7 +66,8 @@ List<int> selectedSubscription = [];
           "state": " Karnataka",
           "postal_code": "12345",
           "country": "US"
-        }
+        },
+        'subscription':selectedSubscription.toString()
       }),
     );
     final res = jsonDecode(response.body);
@@ -253,10 +254,20 @@ List<int> selectedSubscription = [];
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onTap: () async {
+                    print({
+                      "address": {
+                        "line1": "123 Main St",
+                        "city": " Bangalore",
+                        "state": " Karnataka",
+                        "postal_code": "12345",
+                        "country": "US"
+                      },
+                      'subscription_id':selectedSubscription.toString()
+                    });
                     /*final url = await getUrl(selectedWidget, selectedPack == "month");
                     GoRouter.of(context).pushNamed(MyAppRouteConst.paymentRoute,
                         extra: url);*/
-                    for(int i=0;i<selectedSubscription.length;i++){
+                    for(int i=0 ; i<selectedSubscription.length;i++){
                     final url = await getUrl(selectedSubscription[i], selectedPack == "month");
                     GoRouter.of(context).pushNamed(MyAppRouteConst.paymentRoute,
                         extra: url);}

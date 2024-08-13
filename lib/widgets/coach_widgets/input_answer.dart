@@ -194,9 +194,8 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
         const SnackBar(content: Text('Draft saved successfully.')),
       );
     }
-
-    _answerController.clear();
   }
+
  void _postAnswer(String? answer) async {
     if (answer == null || answer.length <= 1) {
       _showSnackBarMessage('Please answer the question');
@@ -777,45 +776,54 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          padding: EdgeInsets.only(left: 20,right: 5),
-                          width: MediaQuery.of(context).size.width - 20,
-                          height: 48,
-                          alignment: Alignment.centerLeft,
-                          decoration: BoxDecoration(
-                          color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.35),
-                                  blurRadius: 4,
-                                  offset: Offset(0,1)
-                                  
-                                )
+                        child: InkWell(
+                          onTap:  () {
+                            GoRouter.of(context)
+                                .pushNamed(MyAppRouteConst.iqRoute,
+                                pathParameters: {
+                                  'appId': '3'
+                                });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.only(left: 20,right: 5),
+                            width: MediaQuery.of(context).size.width - 20,
+                            height: 48,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                            color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.35),
+                                    blurRadius: 4,
+                                    offset: Offset(0,1)
+                                    
+                                  )
+                                ],
+                          
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                  color: const Color(0xFF3629B7).withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                  width:25,
+                                  height:24,
+                                    child: Image.asset('assets/elements/concept.png',)).paddingOnly(right: 20),
+                          
+                                Text(
+                                  "${widget.conceptList[index]}",
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14
+                                  ),
+                                ),
                               ],
-
-                            borderRadius: BorderRadius.circular(10)
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                color: const Color(0xFF3629B7).withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(5)
-                                ),
-                                width:25,
-                                height:24,
-                                  child: Image.asset('assets/elements/concept.png',)).paddingOnly(right: 20),
-
-                              Text(
-                                "${widget.conceptList[index]}",
-                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       );

@@ -66,9 +66,8 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
               children: [
                 widget.isPrevious
                     ? Container(
-                        width: 45,
-                        height: 23,
-                        decoration: BoxDecoration(
+                  padding: EdgeInsets.only(top: 3,bottom: 3,right: 8,left: 8),
+                  decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -79,7 +78,7 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
                               .textTheme
                               .titleMedium!
                               .copyWith(
-                                  fontSize: 11,
+                                  fontSize: 13,
                                   color: getColorByRating(rating / 10),
                                   fontWeight: FontWeight.w700),
                         ),
@@ -90,7 +89,7 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
                             .textTheme
                             .titleMedium!
                             .copyWith(
-                                fontSize: 14,
+                                fontSize: 15,
                                 color: MyConsts.primaryDark,
                                 fontWeight: FontWeight.w700),
                       ),
@@ -111,7 +110,7 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 13, color: MyConsts.primaryDark),
+                  .copyWith(fontSize: 14, color: MyConsts.primaryDark),
               maxLines: isExpanded ? 100 : 2,
             ),
             IconButton(

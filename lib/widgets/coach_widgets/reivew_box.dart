@@ -145,7 +145,7 @@ var  isReport  = false.obs;
                                             Text(
                                               params[index],
                                               style: TextStyle(
-                                                fontSize: 13,
+                                                fontSize: 14,
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.bold,
                                               ),
@@ -212,7 +212,7 @@ var  isReport  = false.obs;
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                        fontSize: 14,
+                                        fontSize: 14.5,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -222,7 +222,7 @@ var  isReport  = false.obs;
                             Image.asset(
                               "assets/elements/arrows.png",
                               width: 22,
-                            )
+                            ),
                           ],
                         ).paddingOnly(left: 15, top: 10, right: 15),
                         if(isScore.value)
@@ -287,7 +287,7 @@ var  isReport  = false.obs;
                                         .textTheme
                                         .titleMedium!
                                         .copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.5,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
                                         ),
@@ -331,7 +331,6 @@ var  isReport  = false.obs;
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-
                                                     Text(
                                                       answerRating.result
                                                           .suggestionsReport[index],
@@ -339,7 +338,7 @@ var  isReport  = false.obs;
                                                           .textTheme
                                                           .titleMedium!
                                                           .copyWith(
-                                                            fontSize: 13,
+                                                            fontSize: 14,
                                                             color: Colors.black,
                                                             fontWeight:
                                                                 FontWeight.w600,
@@ -374,7 +373,7 @@ var  isReport  = false.obs;
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                                fontSize: 14,
+                                                fontSize: 14.5,
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w700,
                                               ),

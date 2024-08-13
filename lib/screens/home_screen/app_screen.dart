@@ -406,6 +406,7 @@ class _AppsScreenState extends State<AppsScreen> {
                             for (int i = 0; i < purchasedApps.length; ++i)
                               ZoomTapAnimation(
                                   onTap: () {
+                                    print("purchaseed $purchasedApps");
                                     if (purchasedApps[i][2] ==
                                         MyConsts.appTypes[0]) {
                                       GoRouter.of(context).pushNamed(

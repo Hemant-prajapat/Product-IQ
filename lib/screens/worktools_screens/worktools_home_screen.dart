@@ -12,6 +12,7 @@ import 'package:product_iq/services/recently_visited_provider.dart';
 import 'package:product_iq/widgets/worktools_widgets/main_card.dart';
 import 'package:product_iq/widgets/common_widgets/category_chip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../crash_error_screen.dart';
 import 'worktools_main_screen.dart';
 import 'package:product_iq/widgets/common_widgets/search_widget.dart';
 import 'package:http/http.dart' as http;
@@ -45,16 +46,19 @@ class _WorktoolsHomeScreenState extends ConsumerState<WorktoolsHomeScreen> {
   }
 
   void loadCategories() async {
+    try{
     if (MyConsts.token == '') {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
         MyConsts.token = preferences.getString("token")!;
       });
     }
-
     final appsUrl = Uri.parse('${MyConsts.baseUrl}/app/${widget.appId}/categorie');
+    print('baseUrl---->${MyConsts.baseUrl}/app/${widget.appId}/categorie');
+print("header ${MyConsts.requestHeader}");
     http.Response response =
         await http.get(appsUrl, headers: MyConsts.requestHeader);
+    print(response.body);
     var res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       res = jsonDecode(response.body);
@@ -70,9 +74,22 @@ class _WorktoolsHomeScreenState extends ConsumerState<WorktoolsHomeScreen> {
     } else {
       debugPrint(response.body);
     }
-  }
+    } catch (e) {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     // builder: (context) => CrashErrorScreen(retry:loadCategories ),
+      //   ),
+      // );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+    }
 
-  void loadCards(int categoryId) async {
+  void loadCards(int  categoryId) async {
+    try{
     skills.clear();
     final cardsUrl =
         Uri.parse('${MyConsts.baseUrl}/app/${widget.appId}/categorie/$categoryId');
@@ -108,6 +125,19 @@ class _WorktoolsHomeScreenState extends ConsumerState<WorktoolsHomeScreen> {
     setState(() {
       isLoading = false;
     });
+
+    } catch (e) {
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => CrashErrorScreen(retry:(){ loadCards(widget.initialCategory); }),
+      //   ),
+      // );
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -232,11 +262,12 @@ class _WorktoolsHomeScreenState extends ConsumerState<WorktoolsHomeScreen> {
                         : SingleChildScrollView(
                             child: Column(
                               children: [
-                                for (var skill in filteredSkills)
+                                for (var skill in filteredSkills.where((skill) => skill.active))
                                   Opacity(
                                     opacity: skill.isAllowed ? 1 : 0.5,
                                     child: MainWorktoolsCard(
                                       heading: skill.name,
+
                                       tagText1: skill.tags[0],
                                       tagText2: skill.tags[1],
                                       subheading: skill.description,
