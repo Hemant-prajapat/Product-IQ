@@ -167,7 +167,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                         color:
                                             MyConsts.bgColor.withOpacity(0.5),
                                         thickness: 2,
-                                      ).paddingOnly(top: 5, bottom: 5),
+                                      ).paddingOnly(top:10, bottom: 10),
                                       Text(
                                         widget.problem['level_question']!,
                                         textAlign: TextAlign.center,

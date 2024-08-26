@@ -331,14 +331,14 @@ var  isReport  = false.obs;
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
+                                                    Text("• "+
                                                       answerRating.result
                                                           .suggestionsReport[index],
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .titleMedium!
                                                           .copyWith(
-                                                            fontSize: 14,
+                                                            fontSize: 15.5,
                                                             color: Colors.black,
                                                             fontWeight:
                                                                 FontWeight.w600,

@@ -64,11 +64,11 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
     print("request headerhemant ---- ${response.body}");
     if(response.statusCode == 200) {
       res = jsonDecode(response.body);
-      debugPrint(res.toString());
+      print("response----"+res.toString());
         for (var challenge in res) {
           var coachChallenge = CoachChallenge.fromJson(challenge);
           challenges.add(coachChallenge);
-          print("coach challenge ${coachChallenge.labels[0].sampleAnswer}");
+          print("ankit coach challenge ${coachChallenge.labels[0].sampleAnswer}");
           print("coach challenge ${coachChallenge.labels[0].companyLogo}");
           //sort labels by order
           coachChallenge.labels.sort((a, b) => a.order.compareTo(b.order));

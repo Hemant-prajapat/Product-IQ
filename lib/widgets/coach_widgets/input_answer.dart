@@ -216,7 +216,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
 
     http.Response response = await http.post(postAnswerUrl,
         headers: MyConsts.requestHeader, body: json.encode({'answer': answer}));
-    print("response of answer '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.labelId}'");
+    print("response of hemant '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.labelId}'");
     final res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       debugPrint(res.toString());
@@ -227,7 +227,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
           previousAnswer = Answer.fromJson(res['previous']);
           print("hemant is answer ${res['previous']}");
           // previousAnswer!.evalutionResult = null;
-          previousAnswer!.evaluationResult = res['previous']['evalution_result'].toString();
+          // previousAnswer!.evaluationResult = res['previous']['evalution_result'].toString();
         }
         isSubmitting = false;
       });
@@ -547,7 +547,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                 Text(
                   "Hint",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 13,
+                      fontSize: 14,
                       color: Colors.black,
                       fontWeight: FontWeight.w700),
                 ),
@@ -556,7 +556,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                 ),
                 Text(hint,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: 12,
+                        fontSize: 14 ,
                         color: Colors.black54,
                         fontWeight: FontWeight.w500)),
                 Row(

@@ -188,9 +188,10 @@ static const iqIndustryColor = Color(0xFF082AA8);
   static const productColors = [
     [Color(0xFF3629B7), Color(0xFF3629B7)],
     [Color(0xFF998EFF), Color(0xFF998EFF)],
-    [Color(0xFF73D2F2), Color(0xFF02A8E0)],
+    [Color(0xFF337A73), Color(0xFF337A73)],
     [Color(0xFF082AA8), Color(0xFF082AA8)],
   ];
+  // 337A73
   static const productimage = [
     "assets/elements/coach.svg",
     "assets/elements/interview.svg",
