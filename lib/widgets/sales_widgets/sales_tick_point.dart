@@ -13,8 +13,7 @@ class SalesTickPoint extends StatelessWidget {
     return Row(
       children: [
         Image.asset(
-          'assets/elements/tick.png',
-          // semanticsLabel: "tick",
+          'assets/elements/tick2.png',
           height: 20,
           width: 20,
         ),

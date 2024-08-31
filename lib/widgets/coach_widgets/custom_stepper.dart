@@ -49,7 +49,7 @@ class CustomStepper extends StatelessWidget {
             Text(
               heading,
               style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: MyConsts.productColors[0][0],
+                  color: MyConsts.productColors[3][0],
                   fontSize: 18,
                   height: 1.3),
             ),

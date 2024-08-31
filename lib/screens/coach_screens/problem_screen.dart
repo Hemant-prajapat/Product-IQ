@@ -14,11 +14,11 @@ import '../../routes/app_route_consts.dart';
 class ProblemScreen extends StatefulWidget {
   ProblemScreen(
       {super.key,
-      required this.problemTitle,
-      required this.problem,
-      required this.problemId,
-      required this.moduleId,
-      required this.appId});
+        required this.problemTitle,
+        required this.problem,
+        required this.problemId,
+        required this.moduleId,
+        required this.appId});
 
   final String moduleId;
   final int appId;
@@ -52,7 +52,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
     final previousAnswerUrl = Uri.parse(
         '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.problem['labelId']}/all');
     http.Response response =
-        await http.get(previousAnswerUrl, headers: MyConsts.requestHeader);
+    await http.get(previousAnswerUrl, headers: MyConsts.requestHeader);
     if (response.statusCode == 200) {
       final res = jsonDecode(response.body);
       debugPrint( "tester previous answer "+res.toString());
@@ -93,11 +93,11 @@ class _ProblemScreenState extends State<ProblemScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("problem is $widget.problem");
+    print("problem is ${widget.problem}");
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: MyConsts.productColors[0][0],
+        backgroundColor: MyConsts.productColors[3][0],
         //appBar: AppBar(backgroundColor: Colors.transparent,),
         body: SingleChildScrollView(
           child: Stack(
@@ -116,7 +116,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                         children: [
                           Image.asset(
                             "assets/elements/question-bg.png",
-                            color: MyConsts.productColors[0][0],
+                            color: MyConsts.productColors[3][0],
                             colorBlendMode: BlendMode.multiply,
                             width: double.infinity,
                             height: deviceHeight * 0.4,
@@ -130,26 +130,26 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   widget.problem['companyLogo'] == '1' ||
-                                          widget.problem['companyLogo'] == null
+                                      widget.problem['companyLogo'] == null
                                       ? SizedBox.shrink()
                                       : Image.network(
-                                          "${MyConsts.imageUrl}${widget.problem['companyLogo']}",
-                                          height: 35,
-                                          width: 35,
-                                        ),
+                                    "${MyConsts.imageUrl}${widget.problem['companyLogo']}",
+                                    height: 35,
+                                    width: 35,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Text(
                                     widget.problemTitle,
                                     style:
-                                        Theme.of(context).textTheme.titleLarge,
+                                    Theme.of(context).textTheme.titleLarge,
                                   ),
                                 ],
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(40, 20, 40, 0),
+                                const EdgeInsets.fromLTRB(40, 20, 40, 0),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: Column(
@@ -161,11 +161,11 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                             .textTheme
                                             .bodyLarge!
                                             .copyWith(
-                                                fontSize: 16, height: 1.2),
+                                            fontSize: 16, height: 1.2),
                                       ),
                                       Divider(
                                         color:
-                                            MyConsts.bgColor.withOpacity(0.5),
+                                        MyConsts.bgColor.withOpacity(0.5),
                                         thickness: 2,
                                       ).paddingOnly(top:10, bottom: 10),
                                       Text(
@@ -175,7 +175,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                             .textTheme
                                             .bodyLarge!
                                             .copyWith(
-                                                fontSize: 16, height: 1.2),
+                                            fontSize: 16, height: 1.2),
                                       ),
                                     ],
                                   ),
@@ -202,9 +202,10 @@ class _ProblemScreenState extends State<ProblemScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 30),
                           child: InputAnswerBox(
+                            conceptId: widget.problem['topic_id'],
                             conceptList: widget.problem['topics'],
                             completedPercent:
-                                widget.problem['completedPercent']!,
+                            widget.problem['completedPercent']!,
                             hint: widget.problem['levelHint']!,
                             sampleAnswer: widget.problem['sampleAnswer']!,
                             totalPercent: widget.problem['totalPercent']!,
@@ -243,6 +244,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                       _fetchPreviousAnswer();
                     },
                   )),
+
             ],
           ),
         ));

@@ -26,6 +26,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
       {super.key,
       required this.labelId,
       required this.hint,
+      required this.conceptId,
       required this.sampleAnswer,
       required this.totalPercent,
       required this.completedPercent,
@@ -38,6 +39,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
   final String sampleAnswer;
   final String moduleId;
   final List<dynamic> conceptList;
+  final List<dynamic> conceptId;
   final String completedPercent;
   final String totalPercent;
   final int appId;
@@ -85,7 +87,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       msg: "Microphone is Turn on",
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor:MyConsts.productColors[0][0],
+      backgroundColor:MyConsts.productColors[3][0],
       textColor:Colors.white,
       fontSize: 14.0,
     );
@@ -98,7 +100,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       msg: "Microphone is Turn off",
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor:MyConsts.productColors[0][0],
+      backgroundColor:MyConsts.productColors[3][0],
       textColor:Colors.white,
       fontSize: 14.0,
     );
@@ -216,7 +218,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
 
     http.Response response = await http.post(postAnswerUrl,
         headers: MyConsts.requestHeader, body: json.encode({'answer': answer}));
-    print("response of hemant '${MyConsts.baseUrl}/app/${widget.appId}/response/lebel/${widget.labelId}'");
+    print("response of hemant '${response.body}'");
     final res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       debugPrint(res.toString());
@@ -286,244 +288,231 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Add Answer",
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontSize: 20,
-                    color: MyConsts.primaryDark,
-                    fontWeight: FontWeight.w700),
-              ),
-              Row(
-                children: [
+    return Container(
 
-                  InkWell(
-                    onTap: () {
-                      showBottomSheet(context);
-                    },
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "assets/elements/book.png",
-                          width: 17,
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          "Learn Concepts",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(
-                                  fontSize: 10,
-                                  color: MyConsts.productColors[0][0],
-                                  fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      showMyDialog(context,widget.hint);
-                    },
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          "assets/elements/bulb2.png",
-                          width: 17,
-                        ),
-                        const SizedBox(
-                          width: 3,
-                        ),
-                        Text(
-                          widget.appId!= 5 ? "Hint": "Assumptions",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(
-                              fontSize: 10,
-                              color: MyConsts.productColors[0][0],
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                  ),
+      child: InkWell(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Add Answer",
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontSize: 20,
+                      color: MyConsts.primaryDark,
+                      fontWeight: FontWeight.w700),
+                ),
+                Row(
+                  children: [
 
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          TextField(
-            controller: _answerController,
-            maxLines: 7,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: MyConsts.primaryDark),
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              fillColor: MyConsts.productColors[0][0].withOpacity(0.15),
-              hintText: "Type your answer or tap the microphone to speak",
-              hintStyle: Theme.of(context)
+                    InkWell(
+                      onTap: () {
+                        showBottomSheet(context);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/elements/book.png",
+                            width: 17,
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            "Learn Concepts",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                    fontSize: 10,
+                                    color: MyConsts.productColors[3][0],
+                                    fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showMyDialog(context,widget.hint);
+                      },
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/elements/bulb2.png",
+                            width: 17,
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            widget.appId!= 5 ? "Hint": "Assumptions",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                fontSize: 10,
+                                color: MyConsts.productColors[3][0],
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            TextField(
+              controller: _answerController,
+              maxLines: 7,
+              style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
                   .copyWith(color: MyConsts.primaryDark),
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () async{
-
-                  if(_answerController.text.isNotEmpty){
-                  setState(() {
-                    isSave = true;
-                  });
-                  // Replace with your save draft logic
-                  await saveDraftAnswer();
-                  setState(() {
-                    isSave = false;
-                  });
-                  }else{
-                    _showSnackBarMessage("Please enter your answer");
-                  }
-                },
-                child: Container(
-                    width: MediaQuery.of(context).size.width * 35 / 100,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          const BoxShadow(
-                              color: Color.fromRGBO(100, 100, 111, 0.2),
-                              offset: Offset(0, 4),
-                              blurRadius: 16)
-                        ],
-                        border: Border.all(color: MyConsts.productColors[0][0]),
-                        gradient: const LinearGradient(
-                            colors: [Colors.white, Colors.white],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter)),
-                    child: Center(
-                      child: isSave
-                          ? const SizedBox(
-                              height: 18,
-                              width: 18,
-                              child: CircularProgressIndicator(
-                                color: MyConsts.bgColor,
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : Text(
-                              "SAVE DRAFT",
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: MyConsts.productColors[0][0]),
-                            ),
-                    )),
+              textInputAction: TextInputAction.done,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                fillColor: MyConsts.productColors[3][0].withOpacity(0.15),
+                hintText: "Type your answer or tap the microphone to speak",
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: MyConsts.primaryDark),
               ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
 
-              InkWell(
-                onTap: () {
-                  if (_speechEnabled) {
-                    _speechToText.isListening ? _stopListening() : _startListening();
-                  }
-                },
-                child: Container(
-                  width: 60, // Adjust the width as needed
-                  height: 60, // Adjust the height as needed
-                  decoration: BoxDecoration(
-                    color: Colors.white, // Background color
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 4,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.mic,
-                    size: 22, // Adjust the size of the icon
-                    color: Colors.black,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () async{
+
+                    if(_answerController.text.isNotEmpty){
+                    setState(() {
+                      isSave = true;
+                    });
+                    // Replace with your save draft logic
+                    await saveDraftAnswer();
+                    setState(() {
+                      isSave = false;
+                    });
+                    }else{
+                      _showSnackBarMessage("Please enter your answer");
+                    }
+                  },
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 35 / 100,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            const BoxShadow(
+                                color: Color.fromRGBO(100, 100, 111, 0.2),
+                                offset: Offset(0, 4),
+                                blurRadius: 16)
+                          ],
+                          border: Border.all(color: MyConsts.productColors[3][0]),
+                          gradient: const LinearGradient(
+                              colors: [Colors.white, Colors.white],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter)),
+                      child: Center(
+                        child: isSave
+                            ? const SizedBox(
+                                height: 18,
+                                width: 18,
+                                child: CircularProgressIndicator(
+                                  color: MyConsts.bgColor,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(
+                                "SAVE DRAFT",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                    color: MyConsts.productColors[3][0]),
+                              ),
+                      )),
+                ),
+
+                InkWell(
+                  onTap: () {
+                    if (_speechEnabled) {
+                      _speechToText.isListening ? _stopListening() : _startListening();
+                    }
+                  },
+                  child: Container(
+                    width: 60, // Adjust the width as needed
+                    height: 60, // Adjust the height as needed
+                    decoration: BoxDecoration(
+                      color: Colors.white, // Background color
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: const Icon(
+                      Icons.mic,
+                      size: 22, // Adjust the size of the icon
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-              ),
-              MyElevatedButton(
-                  shadow: MyConsts.shadow1,
-                  width: MediaQuery.of(context).size.width * 34 / 100,
-                  colorFrom: MyConsts.productColors[0][0],
-                  colorTo: MyConsts.productColors[0][0],
-                  child: isSubmitting
-                      ? const SizedBox(
-                          height: 18,
-                          width: 18,
-                          child: CircularProgressIndicator(
-                            color: MyConsts.bgColor,
-                            strokeWidth: 2,
+                MyElevatedButton(
+                    shadow: MyConsts.shadow1,
+                    width: MediaQuery.of(context).size.width * 34 / 100,
+                    colorFrom: MyConsts.productColors[3][0],
+                    colorTo: MyConsts.productColors[3][0],
+                    child: isSubmitting
+                        ? const SizedBox(
+                            height: 18,
+                            width: 18,
+                            child: CircularProgressIndicator(
+                              color: MyConsts.bgColor,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : const Text(
+                            "SUBMIT",
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: MyConsts.bgColor),
                           ),
-                        )
-                      : const Text(
-                          "SUBMIT",
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: MyConsts.bgColor),
-                        ),
-                  onTap: () {
-                    setState(() {
-                      isSubmitting = true;
-                    });
+                    onTap: () {
+                      setState(() {
+                        isSubmitting = true;
+                      });
 
-                    _postAnswer(_answerController.text);
-                  }),
-            ],
-          ),
-          /*MyOutlinedButton(
-              width: double.infinity,
-              outlineColor: MyConsts.productColors[0][0],
-              margin: const EdgeInsets.only(top: 12),
-              child: isLoading
-                  ? const CircularProgressIndicator()
-                  : Text(
-                      "VIEW PREVIOUS ANSWER",
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: MyConsts.productColors[0][0],
-                          ),
-                    ),
-              onTap: () {
-                setState(() {
-                  isLoading = true;
-                });
-                _fetchPreviousAnswer();
-              }),*/
-        ],
+                      _postAnswer(_answerController.text);
+                    }),
+              ],
+            ),
+
+          ],
+        ),
       ),
     );
   }
@@ -573,7 +562,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                                 .titleMedium!
                                 .copyWith(
                                     fontSize: 13,
-                                    color: MyConsts.productColors[0][0],
+                                    color: MyConsts.productColors[3][0],
                                     fontWeight: FontWeight.w700))),
                   ],
                 )
@@ -644,7 +633,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                         style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.bold,
-                            color: MyConsts.productColors[0][0]),
+                            color: MyConsts.productColors[3][0]),
                       ),
                     ),
                     const SizedBox(
@@ -652,7 +641,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: MyConsts.productColors[0][0],
+                          backgroundColor: MyConsts.productColors[3][0],
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5))),
                       onPressed: () {
@@ -693,7 +682,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
-        return BottomSheetContent(sampleAnswer: widget.sampleAnswer,appId: widget.appId,labelId: widget.labelId,conceptList: widget.conceptList,);
+        return BottomSheetContent(conceptId: widget.conceptId,sampleAnswer: widget.sampleAnswer,appId: widget.appId,labelId: widget.labelId,conceptList: widget.conceptList,);
       },
     );
   }
@@ -703,12 +692,14 @@ class BottomSheetContent extends ConsumerStatefulWidget {
   final int appId;
   final String labelId;
   final List<dynamic> conceptList;
+  final List<dynamic> conceptId;
 
   BottomSheetContent({
     required this.sampleAnswer,
     required this.labelId,
     required this.appId,
     required this.conceptList,
+    required this.conceptId,
   });
 
   @override
@@ -778,11 +769,14 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                         padding: const EdgeInsets.all(10.0),
                         child: InkWell(
                           onTap:  () {
-                            GoRouter.of(context)
+                           /* GoRouter.of(context)
                                 .pushNamed(MyAppRouteConst.iqRoute,
                                 pathParameters: {
                                   'appId': '3'
-                                });
+                                });*/
+                            GoRouter.of(context).pushNamed(MyAppRouteConst.iqLearningsRoute,
+                                pathParameters: {'title':widget.conceptList[index].toString() , 'index': widget.conceptId[index].toString(), 'appId': "3"});
+
                           },
                           child: Container(
                             padding: EdgeInsets.only(left: 20,right: 5),
@@ -799,7 +793,6 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                                     
                                   )
                                 ],
-                          
                               borderRadius: BorderRadius.circular(10)
                             ),
                             child: Row(
@@ -882,7 +875,7 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                                     'UNLOCK ANSWER',
                                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                                       fontSize: 13,
-                                      color: remainingUses > 0 ? MyConsts.productColors[0][0] : Colors.grey,
+                                      color: remainingUses > 0 ? MyConsts.productColors[3][0] : Colors.grey,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -921,8 +914,8 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
               child: MyElevatedButton(
                 shadow: MyConsts.shadow1,
                 width: double.infinity,
-                colorFrom: MyConsts.productColors[0][0],
-                colorTo: MyConsts.productColors[0][0],
+                colorFrom: MyConsts.productColors[3][0],
+                colorTo: MyConsts.productColors[3][0],
                 child: isSave
                     ? const SizedBox(
                   height: 18,

@@ -18,6 +18,7 @@ class SubscriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("features $features");
     return Stack(children: [
       Container(
         padding: const EdgeInsets.all(16),

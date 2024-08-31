@@ -4,15 +4,14 @@ import 'package:product_iq/routes/app_route_consts.dart';
 class MyConsts {
 static const iqIndustryColor = Color(0xFF082AA8);
 // TEXTS
-  static const appName = "Product Cohort";
-  static const salesScreenText =
-      "Want to stimulate hands-on Product Manager Experience across levels from couch?";
+  static const appName = "ProductQ";
+  static const salesScreenText = "Want to stimulate hands-on Product Manager Experience across levels from couch?";
   static const freeText = "GET FOR FREE";
   static final productName = [
     "Product Industry Trainer",
-    "PRODUCT WorkTools",
+    "PRODUCT Interview Coach",
     "Product Flash Tutor",
-    "PRODUCT Interview Coach"
+    "PRODUCT WorkTools",
   ];
   static final productNameMap = {
     1: "Product Industry Trainer",
@@ -20,7 +19,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
     3: "Product Flash Tutor"
   };
   static const buyText = "Buy Now";
-  static const signupText = "Signup to Product Cohort!";
+  static const signupText = "Signup to ProductQ!";
   static const signupSubtext =
       "Boost your industry experience in Product Management";
   static const productExperience = [
@@ -45,7 +44,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
   static const passwordError = "Password must be atleast of 8 characters";
   static const signIn = "Sign In";
   static const signUp = "Sign Up";
-  static const loginText = "Login to Product Cohort!";
+  static const loginText = "Login to ProductQ!";
   static const homeButton = "Home";
   static const appButton = "Apps";
   static const profileButton = "Profile";
@@ -86,14 +85,14 @@ static const iqIndustryColor = Color(0xFF082AA8);
 
   static const interviewBulbPoints = [
     "Want the fastest way to gain product knowledge ?",
-    "Are you still spending long hours in going through inefficient video courses ?",
-    "Are you also struggling with just the theory circulating on the web ?",
-    "Have not using AI moved your behind the peers?"
+    "Struggling to find  the “real” PM interview questions ?",
+    "No way to practice PM interview questions & get real-time guidance ?",
+    "Theoretical blogs, videos failing to help in cracking the PM interview ?"
   ];
   static const interviewTickPoints = [
-    "Crafted Product knowledge for day-to-day discussions",
-    "Precise reads for faster consumption and reference",
-    "Refer business case-studies to back your research",
+    "PM interview questions from Meta, Google, Airbnb, Amazon & more",
+    "Practice the questions with real-time guidance 24 X 7",
+    "Get report and areas to improve for each assignment"
   ];
 
   static const iqBulbPoints = [
@@ -103,7 +102,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
     "Are you also struggling with just the theory circulating on the web"
   ];
   static const iqWorktoolsBulbPoints = [
-    "Already a Product Manager ?",
+    "Already a Product Manager ? ",
     "Are you spending long hours to write product documents, instead want to save time?",
     "Do you want to get all possible ideas to pick for your product tasks, without missing any?",
     "Have not using AI moved your behind the peers?"
@@ -191,7 +190,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
     [Color(0xFF337A73), Color(0xFF337A73)],
     [Color(0xFF082AA8), Color(0xFF082AA8)],
   ];
-  // 337A73
+
   static const productimage = [
     "assets/elements/coach.svg",
     "assets/elements/interview.svg",

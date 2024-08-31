@@ -16,7 +16,7 @@ class StepperBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          color: MyConsts.productColors[0][0].withOpacity(isLocked ? 0.7 : 1),
+          color: MyConsts.productColors[3][0].withOpacity(isLocked ? 0.7 : 1),
           borderRadius: BorderRadius.circular(8)),
       child: Padding(
         padding: const EdgeInsets.only(left: 64.0, top: 18, bottom: 18, right: 12),

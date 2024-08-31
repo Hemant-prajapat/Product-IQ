@@ -86,7 +86,7 @@ class TrendingScreen3 extends StatelessWidget {
                       padding: const EdgeInsets.all(24.0),
                       child: Center(
                         child: MyElevatedButton(
-                          colorFrom: MyConsts.productColors[0][0],
+                          colorFrom: MyConsts.productColors[3][0],
                           colorTo: MyConsts.productColors[0][1],
                           width: 300,
                           onTap: onTap[i],

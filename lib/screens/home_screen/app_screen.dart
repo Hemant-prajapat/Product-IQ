@@ -78,19 +78,19 @@ class _AppsScreenState extends State<AppsScreen> {
       var res = jsonDecode(response.body);
       if (response.statusCode == 200) {
         res = jsonDecode(response.body);
-        debugPrint(res.toString());
+        print("hemant response " + res.toString());
         for (var app in res) {
+          purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
           if (app["app_type"] == MyConsts.appTypes[3]) {
             continue;
           }
           if (app["is_subscribed"] == true) {
-            purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
             if (app['app_type'] == MyConsts.appTypes[0]) {
               MyConsts.isCoachSubscribed = true;
-            } else if (app['app_type'] == MyConsts.appTypes[1]) {
-              MyConsts.isWorktoolsSubscribed = true;
             } else if (app['app_type'] == MyConsts.appTypes[2]) {
               MyConsts.isIqSubscribed = true;
+            }else if (app['app_type'] == MyConsts.appTypes[1]) {
+              MyConsts.isWorktoolsSubscribed = true;
             }
           } else {
             unPurchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
@@ -101,6 +101,7 @@ class _AppsScreenState extends State<AppsScreen> {
         throw Exception('Failed to load apps');
       }
     } catch (e) {
+      print("error is $e");
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -122,83 +123,6 @@ class _AppsScreenState extends State<AppsScreen> {
     }
   }
 
-  /*void getApps() async {
-    if (MyConsts.token == '') {
-      SharedPreferences preferences = await SharedPreferences.getInstance();
-      setState(() {
-        MyConsts.token = preferences.getString("token")!;
-        debugPrint("New token");
-      });
-    }
-    final expiryDate = JwtDecoder.getExpirationDate(MyConsts.token);
-    debugPrint(expiryDate.toString());
-
-    debugPrint(MyConsts.token);
-    final appsUrl = Uri.parse('${MyConsts.baseUrl}/app/all');
-    http.Response response =
-        await http.get(appsUrl, headers: MyConsts.requestHeader);
-    var res = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      res = jsonDecode(response.body);
-      debugPrint(res.toString());
-      for (var app in res) {
-        if (app["app_type"] == MyConsts.appTypes[3]) {
-          continue;
-        }
-        if (app["is_subscribed"] == true) {
-          purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
-          if (app['app_type'] == MyConsts.appTypes[0]) {
-            MyConsts.isCoachSubscribed = true;
-          } else if (app['app_type'] == MyConsts.appTypes[1]) {
-            MyConsts.isWorktoolsSubscribed = true;
-          } else if (app['app_type'] == MyConsts.appTypes[2]) {
-            MyConsts.isIqSubscribed = true;
-          }
-        } else {
-          unPurchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
-        }
-      }
-    } else {
-      debugPrint(response.body);
-    }
-    setState(() {
-      isLoading = false;
-    });
-
-    if (!MyConsts.isSubscribed) {
-      await _getOffers();
-    } else {
-      setState(() {
-        isOffersLoaded = true;
-      });
-    }
-  }
-*/
-  /*
-
-  Future<void> _getOffers() async {
-    final offersUrl = Uri.parse('${MyConsts.baseUrl}/subscription/plans');
-    http.Response response =
-        await http.get(offersUrl, headers: MyConsts.requestHeader);
-
-    if (response.statusCode == 200) {
-      final res = jsonDecode(response.body);
-      for (var offer in res) {
-        for (var app in offer["apps"]) {
-          if (unPurchasedApps.any((element) => element[0] == app)) {
-            offers.add(Subscription.fromJson(offer));
-            break;
-          }
-        }
-      }
-    } else {
-      debugPrint(response.body);
-    }
-    setState(() {
-      isOffersLoaded = true;
-    });
-  }
-*/
   Future<void> _getOffers() async {
     try {
       final offersUrl = Uri.parse('${MyConsts.baseUrl}/subscription/plans');
@@ -219,6 +143,7 @@ class _AppsScreenState extends State<AppsScreen> {
         throw Exception('Failed to load offers');
       }
     } catch (e) {
+      print("error ${e}");
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -240,6 +165,7 @@ class _AppsScreenState extends State<AppsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(purchasedApps);
     if (MyConsts.isPurchased) {
       setState(() {
         isLoading = true;
@@ -406,7 +332,7 @@ class _AppsScreenState extends State<AppsScreen> {
                             for (int i = 0; i < purchasedApps.length; ++i)
                               ZoomTapAnimation(
                                   onTap: () {
-                                    print("purchaseed $purchasedApps");
+                                    print(" purchased $purchasedApps");
                                     if (purchasedApps[i][2] ==
                                         MyConsts.appTypes[0]) {
                                       GoRouter.of(context).pushNamed(

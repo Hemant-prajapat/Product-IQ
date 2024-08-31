@@ -37,7 +37,7 @@ class ReviewScreen extends StatelessWidget {
             MyConsts.productNameMap[appId]!,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          backgroundColor: MyConsts.productColors[0][0],
+          backgroundColor: MyConsts.productColors[3][0],
         ),
         backgroundColor: MyConsts.bgColor,
         body: SingleChildScrollView(
@@ -107,7 +107,7 @@ class ReviewScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border:
-                            Border.all(color: MyConsts.productColors[0][0])),
+                            Border.all(color: MyConsts.productColors[3][0])),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -117,7 +117,7 @@ class ReviewScreen extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
-                              .copyWith(color: MyConsts.productColors[0][0]),
+                              .copyWith(color: MyConsts.productColors[3][0]),
                         ),
                         const SizedBox(
                           width: 8,
@@ -125,7 +125,7 @@ class ReviewScreen extends StatelessWidget {
                         Icon(
                           Icons.refresh,
                           size: 18,
-                          color: MyConsts.productColors[0][0],
+                          color: MyConsts.productColors[3][0],
                         ),
                       ],
                     ),
@@ -135,8 +135,8 @@ class ReviewScreen extends StatelessWidget {
                   width: deviceWidth / 2.5,
                   margin:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                  colorFrom: MyConsts.productColors[0][0],
-                  colorTo: MyConsts.productColors[0][0],
+                  colorFrom: MyConsts.productColors[3][0],
+                  colorTo: MyConsts.productColors[3][0],
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

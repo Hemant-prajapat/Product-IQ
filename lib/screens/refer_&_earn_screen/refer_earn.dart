@@ -40,7 +40,7 @@ class ReferEarnScreen extends GetView<ReferEarnController> {
                       softWrap: true, // Allow text to wrap at word boundaries
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontSize:15,
-                        color: MyConsts.productColors[0][0],
+                        color: MyConsts.productColors[3][0],
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -74,7 +74,7 @@ class ReferEarnScreen extends GetView<ReferEarnController> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: MyConsts.productColors[0][0].withOpacity(0.2),width: 1.5)
+                  border: Border.all(color: MyConsts.productColors[3][0].withOpacity(0.2),width: 1.5)
                 ),
                 child:Row(
 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +87,7 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       copyToClipboard(context);
                     }, child: Text("Copy",style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontSize: 16,
-                        color: MyConsts.productColors[0][0].withOpacity(0.7),
+                        color: MyConsts.productColors[3][0].withOpacity(0.7),
                         fontWeight: FontWeight.w500)))
                   ],
                 ),
@@ -96,8 +96,8 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
               MyElevatedButton(
                   shadow: MyConsts.shadow1,
                   width: double.infinity,
-                  colorFrom: MyConsts.productColors[0][0],
-                  colorTo: MyConsts.productColors[0][0],
+                  colorFrom: MyConsts.productColors[3][0],
+                  colorTo: MyConsts.productColors[3][0],
                   child: const Text(
                     "Share",
                     style: TextStyle(

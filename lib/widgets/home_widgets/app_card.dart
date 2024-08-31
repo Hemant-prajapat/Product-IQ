@@ -11,8 +11,8 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("product type is $productType");
     final int pid = MyConsts.appTypes.indexOf(productType);
+    print("product type is $pid");
     final deviceWidth = MediaQuery.of(context).size.width;
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
@@ -27,7 +27,7 @@ class AppCard extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: isPurchased
-                    ? MyConsts.productColors[pid]
+                    ? MyConsts.productColors[pid==0?3:pid]
                     : [Colors.grey, Colors.grey])),
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0, top: 20),

@@ -8,6 +8,7 @@ class Challenge {
       this.rating,
       required this.companyLogo,
       required this.topics,
+      required this.topicId,
       required this.levelHint,
       required this.sampleAnswer
 
@@ -21,6 +22,7 @@ class Challenge {
   final String  companyLogo;
   final String  sampleAnswer;
   final List<dynamic>  topics;
+  final List<dynamic>  topicId;
 
   final String  levelHint;
   final bool isLocked;

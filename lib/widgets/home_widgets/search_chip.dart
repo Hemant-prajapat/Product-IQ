@@ -24,10 +24,10 @@ class _SearchChipState extends State<SearchChip> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(240),
               color: widget.isSelected
-                  ? MyConsts.productColors[0][0]
+                  ? MyConsts.productColors[3][0]
                   : Colors.white,
               border:
-                  Border.all(width: 2, color: MyConsts.productColors[0][0])),
+                  Border.all(width: 2, color: MyConsts.productColors[3][0])),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -35,7 +35,7 @@ class _SearchChipState extends State<SearchChip> {
                 widget.isSelected ? Icons.check : Icons.add,
                 size: 20,
                 color: !widget.isSelected
-                    ? MyConsts.productColors[0][0]
+                    ? MyConsts.productColors[3][0]
                     : Colors.white,
               ),
               const SizedBox(
@@ -47,7 +47,7 @@ class _SearchChipState extends State<SearchChip> {
                       fontSize: 14,
                       color: widget.isSelected
                           ? Colors.white
-                          : MyConsts.productColors[0][0])),
+                          : MyConsts.productColors[3][0])),
               const SizedBox(
                 width: 2,
               ),

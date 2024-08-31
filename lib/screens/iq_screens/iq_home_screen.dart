@@ -192,7 +192,7 @@ class _IQHomeScreenState extends State<IQHomeScreen> {
                             appId: widget.appId,
                             icon: Icons.sell,
                             text: topic.name,
-                            index: topic.id,
+                            index:  topic.id,
                             isAllowed: topic.isAllowed,
                           ),
                         ),

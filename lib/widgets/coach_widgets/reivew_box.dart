@@ -75,7 +75,9 @@ var  isReport  = false.obs;
               animation: true,
               percent: rating / 10,
               lineWidth: 5,
-              progressColor: Colors.green,
+              progressColor: getColorByRating(
+                  rating/
+                      10),
               backgroundWidth: 1,
               animateFromLastPercent: true,
               center: Container(
@@ -145,8 +147,8 @@ var  isReport  = false.obs;
                                             Text(
                                               params[index],
                                               style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.grey,
+                                                fontSize: 15,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
@@ -212,7 +214,7 @@ var  isReport  = false.obs;
                                       .textTheme
                                       .titleMedium!
                                       .copyWith(
-                                        fontSize: 14.5,
+                                        fontSize: 15,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -287,7 +289,7 @@ var  isReport  = false.obs;
                                         .textTheme
                                         .titleMedium!
                                         .copyWith(
-                                          fontSize: 14.5,
+                                          fontSize: 15,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
                                         ),
@@ -373,7 +375,7 @@ var  isReport  = false.obs;
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
-                                                fontSize: 14.5,
+                                                fontSize: 15,
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w700,
                                               ),

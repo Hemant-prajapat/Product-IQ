@@ -27,7 +27,9 @@ class ProductSalesScreen extends StatelessWidget {
                   size: Size(deviceWidth, deviceWidth * 0.95),
                   //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
                   painter: RPSCustomPainter(
+                      MyConsts.productName[index - 1]== "PRODUCT Interview Coach"? Color(0xFF082AA8):
                       MyConsts.productColors[index - 1][0],
+                      MyConsts.productName[index - 1]== "PRODUCT Interview Coach"? Color(0xFF082AA8):
                       MyConsts.productColors[index - 1][1]),
                 ),
               ),
@@ -60,8 +62,7 @@ class ProductSalesScreen extends StatelessWidget {
                         index == 1
                             ? MyConsts.coachBulbPoints[0]
                             : index == 2
-                                ? MyConsts.iqWorktoolsBulbPoints[0]
-                                : index == 3 ? MyConsts.interviewBulbPoints[0] :MyConsts.iqBulbPoints[0]  ,
+                                ? MyConsts.interviewBulbPoints[0] :MyConsts.iqBulbPoints[0]  ,
                         style: Theme.of(context).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.w900,color: Colors.white),
                         textAlign: TextAlign.center,
                       ),
@@ -76,8 +77,7 @@ class ProductSalesScreen extends StatelessWidget {
                               index == 1
                                   ? MyConsts.coachBulbPoints[i]
                                   : index == 2
-                                      ? MyConsts.iqWorktoolsBulbPoints[i]
-                                      : index == 3 ? MyConsts.interviewBulbPoints[i] : MyConsts.iqBulbPoints[i],
+                                      ? MyConsts.interviewBulbPoints[i] : MyConsts.iqBulbPoints[i],
                             ),
                           ),
                       ],
@@ -117,8 +117,7 @@ class ProductSalesScreen extends StatelessWidget {
                         index == 1
                             ? MyConsts.coachTickPoints[i]
                             : index == 2
-                                ? MyConsts.iqWorktoolsTickPoints[i]
-                                : index == 3
+
                             ? MyConsts.interviewTickPoints[i]
                             : MyConsts.iqTickPoints[i],
                       ),
@@ -127,35 +126,7 @@ class ProductSalesScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Row(
-          //   mainAxisSize: MainAxisSize.min,
-          //   children: [
-          //     const Spacer(),
-          //     GestureDetector(
-          //       onTap: () {
-          //         GoRouter.of(context)
-          //             .pushNamed(MyAppRouteConst.subscriptionRoute, extra: index-1);
-          //       },
-          //       child: Container(
-          //         margin:
-          //             const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
-          //         padding:
-          //             const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          //         decoration: BoxDecoration(
-          //             borderRadius: BorderRadius.circular(8),
-          //             boxShadow: const [MyConsts.shadow1],
-          //             gradient: LinearGradient(colors: [
-          //               MyConsts.productColors[index - 1][0],
-          //               MyConsts.productColors[index - 1][1]
-          //             ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-          //         child: Text(
-          //           MyConsts.buyText,
-          //           style: Theme.of(context).textTheme.titleSmall,
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // )
+
         ],
       ),
     );

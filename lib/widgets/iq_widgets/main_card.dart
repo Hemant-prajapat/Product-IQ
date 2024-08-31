@@ -53,6 +53,8 @@ class MainIQCard extends ConsumerWidget {
         ),
         onTap: () {
           if(!isAllowed) {
+            print( " ankit --------------- ${'title'+ text  +'index'+ index.toString()+ 'appId' +  appId.toString()}");
+
             showDialog(
               context: context,
               builder: (context) {
@@ -94,6 +96,7 @@ class MainIQCard extends ConsumerWidget {
               MyConsts.appTypes[2],
               MyAppRouteConst.iqLearningsRoute,
               index.toString());
+          print( " hemant --------------- ${'title'+ text  +'index'+ index.toString()+ 'appId' +  appId.toString()}");
           GoRouter.of(context).pushNamed(MyAppRouteConst.iqLearningsRoute,
               pathParameters: {'title': text, 'index': index.toString(), 'appId': appId.toString()});
         });

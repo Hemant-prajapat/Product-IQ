@@ -73,8 +73,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
           //sort labels by order
           coachChallenge.labels.sort((a, b) => a.order.compareTo(b.order));
         }
-        setState(() {
-        });
+
     } else {
       debugPrint(response.body);
     }
@@ -95,7 +94,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: MyConsts.productColors[0][0],
+                    color: MyConsts.productColors[3][0],
                     borderRadius: BorderRadius.circular(12)),
                 child: Padding(
                   padding:
@@ -139,9 +138,6 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: CustomStepper2(
-                              // companyLogo: challenge.labels[0].companyLogo!,
-                              // levelHint: challenge.labels[0].levelHint!,
-                              // sampleAnswer: challenge.labels[0].sampleAnswer!,
                               completedPercent: widget.completedPercent.toString(),
                               totalPercent: widget.totalPercent.toString(),
                               appId: widget.appId,
@@ -153,6 +149,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
 
                                 for (var label in challenge.labels)
                                   Challenge(
+                                    topicId: label.topicId!,
                                       id: label.id.toString(),
                                       title: label.levelName,
                                       subtitle : label.levelQuestion ?? '',

@@ -61,6 +61,7 @@ class Label {
   final bool? completed;
   final bool isLocked;
   final List<dynamic> ? topics;
+  final List<dynamic> ? topicId;
   final int order;
   final dynamic rating;
   final dynamic result;
@@ -72,6 +73,7 @@ class Label {
     this.sampleAnswer,
     this.levelQuestion,
     this.companyLogo,
+    this.topicId,
     this.levelHint,
     this.topics,
     required this.active,
@@ -92,6 +94,7 @@ class Label {
         companyLogo: json["company_logo"],
         active: json["active"],
     topics: json["topics"],
+    topicId: json["topic_id"],
         completed: json["completed"],
         isLocked: json["is_locked"],
         order: json["order"],
@@ -109,6 +112,7 @@ class Label {
         "company_logo":companyLogo,
         "active": active,
         "topics": topics,
+        "topic_id": topicId,
         "is_locked": isLocked,
         "order": order,
         "completed": completed,

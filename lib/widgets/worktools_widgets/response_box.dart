@@ -19,7 +19,7 @@ class ResponseBox extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 20, 40, 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: MyConsts.productColors[1][0].withOpacity(0.3)),
+                color: MyConsts.productColors[3][0].withOpacity(0.3)),
             child: SkillGapText(
               heading: responseText.featureName,
               body: responseText.featureDetailPoints[0],

@@ -39,7 +39,7 @@ class _MainSalesScreenState extends State<MainSalesScreen> {
 
   void startAutoScroll() {
     timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      int nextPage = (currentIndex + 1) % 5;
+      int nextPage = (currentIndex + 1) % 4;
       _pageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 300),
@@ -80,7 +80,7 @@ class _MainSalesScreenState extends State<MainSalesScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              for (int i = 0; i < 5; ++i)
+              for (int i = 0; i < 4; ++i)
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   margin: const EdgeInsets.all(4),

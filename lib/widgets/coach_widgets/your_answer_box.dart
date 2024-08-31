@@ -55,7 +55,7 @@ class _YourAnswerBoxState extends State<YourAnswerBox> {
       duration: const Duration(milliseconds: 200),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: MyConsts.productColors[0][0].withOpacity(0.15),
+          color: MyConsts.productColors[3][0].withOpacity(0.15),
           borderRadius: BorderRadius.circular(8)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 15),

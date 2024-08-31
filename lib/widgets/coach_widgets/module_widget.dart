@@ -27,7 +27,7 @@ class ModuleWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: MyConsts.productColors[0][0],
+                color: MyConsts.productColors[3][0],
               ),
               height: deviceWidth * 0.13,
               width: deviceWidth * 0.13,
@@ -56,7 +56,7 @@ class ModuleWidget extends StatelessWidget {
                   height: 10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: MyConsts.productColors[0][0].withOpacity(0.2),
+                    color: MyConsts.productColors[3][0].withOpacity(0.2),
                   ),
                 ),
                 Container(
@@ -64,7 +64,7 @@ class ModuleWidget extends StatelessWidget {
                   height: 10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: MyConsts.productColors[0][0],
+                    color: MyConsts.productColors[3][0],
                   ),
                 ),
               ],

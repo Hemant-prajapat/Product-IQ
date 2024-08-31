@@ -113,7 +113,7 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
             child: Container(
               color: MyConsts.bgColor,
               child: TabBar(
-                labelColor: MyConsts.productColors[0][0],
+                labelColor: MyConsts.productColors[3][0],
                 labelStyle: Theme.of(context)
                     .textTheme
                     .titleSmall
@@ -123,7 +123,7 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                     .titleSmall
                     ?.copyWith(fontSize: 15),
                 unselectedLabelColor: Colors.grey,
-                indicatorColor: MyConsts.productColors[0][0].withOpacity(0.4),
+                indicatorColor: MyConsts.productColors[3][0].withOpacity(0.4),
                 automaticIndicatorColorAdjustment: false,
                 overlayColor: MaterialStateProperty.resolveWith(
                     (states) => Colors.grey.shade300),

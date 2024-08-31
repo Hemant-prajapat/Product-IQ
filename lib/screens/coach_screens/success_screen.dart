@@ -21,10 +21,10 @@ class SuccessScreen extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       boxShadow: [MyConsts.coachShadow],
-                      color: MyConsts.productColors[0][0],
+                      color: MyConsts.productColors[3][0],
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
-                          color: MyConsts.productColors[0][0], width: 12)),
+                          color: MyConsts.productColors[3][0], width: 12)),
                   child: const Icon(
                     Icons.check_rounded,
                     size: 120,
@@ -59,8 +59,8 @@ class SuccessScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 80),
             child: MyElevatedButton(
                 width: double.infinity,
-                colorFrom: MyConsts.productColors[0][0],
-                colorTo: MyConsts.productColors[0][0],
+                colorFrom: MyConsts.productColors[3][0],
+                colorTo: MyConsts.productColors[3][0],
                 child: Text(
                   "See Report",
                   style: Theme.of(context)

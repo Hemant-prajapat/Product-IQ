@@ -26,8 +26,8 @@ class ModuleReport extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           gradient: RadialGradient(colors: [
-                            MyConsts.productColors[0][0].withOpacity(0.7),
-                            MyConsts.productColors[0][0]
+                            MyConsts.productColors[3][0].withOpacity(0.7),
+                            MyConsts.productColors[3][0]
                           ])),
                       child: Center(
                           child: Text(
@@ -64,8 +64,8 @@ class ModuleReport extends StatelessWidget {
                     ),
                     MyElevatedButton(
                         width: double.infinity,
-                        colorFrom: MyConsts.productColors[0][0],
-                        colorTo: MyConsts.productColors[0][0],
+                        colorFrom: MyConsts.productColors[3][0],
+                        colorTo: MyConsts.productColors[3][0],
                         child: Text(
                           "Proceed to Next Challenge",
                           style: Theme.of(context)
@@ -81,8 +81,8 @@ class ModuleReport extends StatelessWidget {
                     ),
                     MyElevatedButton(
                         width: double.infinity,
-                        colorFrom: MyConsts.productColors[0][0],
-                        colorTo: MyConsts.productColors[0][0],
+                        colorFrom: MyConsts.productColors[3][0],
+                        colorTo: MyConsts.productColors[3][0],
                         child: Text(
                           "Learn on ProductIQ",
                           style: Theme.of(context)

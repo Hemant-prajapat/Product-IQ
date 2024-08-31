@@ -35,7 +35,7 @@ class _CategoryChipState extends State<CategoryChip> {
                   ? LinearGradient(
                       colors: widget.colorFrom == null
                           ? [
-                              MyConsts.productColors[1][0],
+                              MyConsts.productColors[3][0],
                               MyConsts.productColors[1][1]
                             ]
                           : [widget.colorFrom!, widget.colorTo!])
@@ -46,7 +46,7 @@ class _CategoryChipState extends State<CategoryChip> {
                   gradient: LinearGradient(
                       colors: widget.colorFrom == null
                           ? [
-                              MyConsts.productColors[1][0],
+                              MyConsts.productColors[3][0],
                               MyConsts.productColors[1][1]
                             ]
                           : [widget.colorFrom!, widget.colorTo!]))),
@@ -55,7 +55,7 @@ class _CategoryChipState extends State<CategoryChip> {
                   fontWeight: FontWeight.w800,
                   color: widget.isSelected
                       ? Colors.white
-                      : widget.colorFrom ?? MyConsts.productColors[1][0]))),
+                      : widget.colorFrom ?? MyConsts.productColors[3][0]))),
     );
   }
 }

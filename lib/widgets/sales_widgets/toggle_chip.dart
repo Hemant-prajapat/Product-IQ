@@ -22,7 +22,7 @@ class ToggleChip extends StatelessWidget {
         inactiveFgColor: MyConsts.primaryDark.withOpacity(0.5),
         initialLabelIndex: selectedIndex,
         totalSwitches: 2,
-        labels: const ['Monthly', 'Yearly'],
+        labels: const ['Monthly', 'Quaterly'],
         customTextStyles: const [
           TextStyle(fontWeight: FontWeight.w700),
           TextStyle(fontWeight: FontWeight.w700),],
