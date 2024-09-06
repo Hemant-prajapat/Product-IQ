@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:product_iq/consts.dart';
 import 'package:product_iq/services/app_service.dart';
 import 'package:provider/provider.dart';

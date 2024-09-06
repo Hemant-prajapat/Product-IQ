@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,6 @@ import 'package:product_iq/consts.dart';
 import 'package:product_iq/models/answer.dart';
 import 'package:product_iq/routes/app_route_consts.dart';
 import 'package:product_iq/widgets/common_widgets/my_elevated_button.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:speech_to_text/speech_to_text.dart';
@@ -26,6 +26,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
       {super.key,
       required this.labelId,
       required this.hint,
+      required this.question,
       required this.conceptId,
       required this.sampleAnswer,
       required this.totalPercent,
@@ -36,6 +37,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
 
   final String labelId;
   final String hint;
+  final String question;
   final String sampleAnswer;
   final String moduleId;
   final List<dynamic> conceptList;
@@ -60,6 +62,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
   String _lastWords = '';
   var isLoading = false;
   var answerId = 0;
+  var isMic= false;
 
   @override
   void initState() {
@@ -91,9 +94,10 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       textColor:Colors.white,
       fontSize: 14.0,
     );
+    isMic = true;
+
     setState(() {});
   }
-
   void _stopListening() async {
     await _speechToText.stop();
     Fluttertoast.showToast(
@@ -104,6 +108,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       textColor:Colors.white,
       fontSize: 14.0,
     );
+    isMic= false;
     setState(() {});
   }
 
@@ -289,7 +294,6 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       child: InkWell(
         onTap: () {
           FocusScope.of(context).unfocus();
@@ -301,9 +305,9 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Add Answer",
+                  "Submit Answer",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 20,
+                      fontSize: 17,
                       color: MyConsts.primaryDark,
                       fontWeight: FontWeight.w700),
                 ),
@@ -329,7 +333,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                    fontSize: 10,
+                                    fontSize: 12,
                                     color: MyConsts.productColors[3][0],
                                     fontWeight: FontWeight.w700),
                           ),
@@ -341,7 +345,8 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     ),
                     InkWell(
                       onTap: () {
-                        showMyDialog(context,widget.hint);
+                        showBottomSheet2(context);
+                        // showMyDialog(context,widget.hint);
                       },
                       child: Row(
                         children: [
@@ -353,12 +358,12 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                             width: 3,
                           ),
                           Text(
-                            widget.appId!= 5 ? "Hint": "Assumptions",
+                            "Hint",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                fontSize: 10,
+                                fontSize: 12,
                                 color: MyConsts.productColors[3][0],
                                 fontWeight: FontWeight.w700),
                           ),
@@ -371,11 +376,11 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
               ],
             ),
             const SizedBox(
-              height: 5,
+              height: 8,
             ),
             TextField(
               controller: _answerController,
-              maxLines: 7,
+              maxLines: widget.question.length==1? 11:9,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -392,7 +397,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
               ),
             ),
             const SizedBox(
-              height: 24,
+              height: 15,
             ),
             Row(
 
@@ -415,7 +420,9 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     }
                   },
                   child: Container(
-                      width: MediaQuery.of(context).size.width * 35 / 100,
+                      width: isMic? MediaQuery.of(context).size.width * 33 / 100:MediaQuery.of(context).size.width * 33 / 100,
+
+                      // width: MediaQuery.of(context).size.width * 35 / 100,
                       padding:
                           const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       decoration: BoxDecoration(
@@ -458,11 +465,12 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     }
                   },
                   child: Container(
-                    width: 60, // Adjust the width as needed
-                    height: 60, // Adjust the height as needed
+                    width: 75, // Adjust the width as needed
+                    height: 75, // Adjust the height as needed
                     decoration: BoxDecoration(
                       color: Colors.white, // Background color
                       shape: BoxShape.circle,
+                      border: Border.all(color:isMic?Colors.green:Colors.transparent),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -473,16 +481,16 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.mic,
-                      size: 22, // Adjust the size of the icon
+                      size: isMic?28:26, // Adjust the size of the icon
                       color: Colors.black,
                     ),
                   ),
                 ),
                 MyElevatedButton(
                     shadow: MyConsts.shadow1,
-                    width: MediaQuery.of(context).size.width * 34 / 100,
+                    width:MediaQuery.of(context).size.width * 32 / 100,
                     colorFrom: MyConsts.productColors[3][0],
                     colorTo: MyConsts.productColors[3][0],
                     child: isSubmitting
@@ -682,31 +690,45 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
-        return BottomSheetContent(conceptId: widget.conceptId,sampleAnswer: widget.sampleAnswer,appId: widget.appId,labelId: widget.labelId,conceptList: widget.conceptList,);
+        return BottomSheetLearnContent(conceptId: widget.conceptId,sampleAnswer: widget.sampleAnswer,appId: widget.appId,labelId: widget.labelId,conceptList: widget.conceptList,);
+      },
+    );
+  }
+  void showBottomSheet2(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+      ),
+      builder: (BuildContext context) {
+        return BottomSheetHintContent(messageText: widget.hint,conceptId: widget.conceptId,sampleAnswer: widget.sampleAnswer,appId: widget.appId,labelId: widget.labelId,conceptList: widget.conceptList,);
       },
     );
   }
 }
-class BottomSheetContent extends ConsumerStatefulWidget {
+class BottomSheetHintContent extends ConsumerStatefulWidget {
   final String sampleAnswer;
+  final String messageText;
   final int appId;
   final String labelId;
   final List<dynamic> conceptList;
   final List<dynamic> conceptId;
 
-  BottomSheetContent({
+  BottomSheetHintContent({
     required this.sampleAnswer,
     required this.labelId,
+    required this.messageText,
     required this.appId,
     required this.conceptList,
     required this.conceptId,
   });
 
   @override
-  _BottomSheetContentState createState() => _BottomSheetContentState();
+  _BottomSheetHintContentState createState() => _BottomSheetHintContentState();
 }
 
-class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
+class _BottomSheetHintContentState extends ConsumerState<BottomSheetHintContent> {
   bool isUnlock = false;
   bool isSave = false;
   int remainingUses = 2;
@@ -748,7 +770,7 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                 Tab(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
-                    child: const Text("Problem Concept", textAlign: TextAlign.center),
+                    child: const Text("Hint", textAlign: TextAlign.center),
                   ),
                 ),
                 Tab(
@@ -762,6 +784,214 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
             Expanded(
               child: TabBarView(
                 children: [
+                  Column(
+                    children: [
+                      Text(widget.messageText,
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                              fontSize: 14 ,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500)),
+                    ],
+                  ).paddingOnly(top: 15,bottom: 10,left: 20,right: 20),
+                  Stack(
+                    children: [
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            Text(
+                              widget.sampleAnswer,
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                fontSize: 12,
+                                color:  Color(0xFF000000),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ).paddingOnly(top: 5, bottom: 5, left: 15, right: 15),
+                            const SizedBox(height: 20),
+                            isUnlock
+                                ? const SizedBox.shrink()
+                                : BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Adjust blur strength
+                              child: Container(
+                                color: Colors.black.withOpacity(0), // Transparent background
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Centered button
+                      isUnlock
+                          ? const SizedBox.shrink()
+                          : Center(
+                        child: ElevatedButton(
+
+                          onPressed: remainingUses > 0
+                              ? () async {
+                            await sampleAnswerUnlockNotifier.addSampleAnswerUnlock(int.parse(widget.labelId), widget.appId);
+                            setState(() {
+                              isUnlock = true;
+                            });
+                            _updateUsageCount(); // Update the usage count after button press
+                          }
+                              : null,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset("assets/elements/lock.png", width: 18),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    'UNLOCK ANSWER',
+                                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                      fontSize: 13,
+                                      color: remainingUses > 0 ? MyConsts.productColors[3][0] : Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '$remainingUses Remaining',
+                                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                      fontSize: 12,
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Adjust button padding
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            // Bottom button
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: MyElevatedButton(
+                shadow: MyConsts.shadow1,
+                width: double.infinity,
+                colorFrom: MyConsts.productColors[3][0],
+                colorTo: MyConsts.productColors[3][0],
+                child: isSave
+                    ? const SizedBox(
+                  height: 18,
+                  width: 18,
+                  child: CircularProgressIndicator(
+                    color: MyConsts.bgColor,
+                    strokeWidth: 2,
+                  ),
+                )
+                    : const Text(
+                  "OK",
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: MyConsts.bgColor,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  // _postAnswer(_answerController.text);
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+class BottomSheetLearnContent extends ConsumerStatefulWidget {
+  final String sampleAnswer;
+  final int appId;
+  final String labelId;
+  final List<dynamic> conceptList;
+  final List<dynamic> conceptId;
+
+  BottomSheetLearnContent({
+    required this.sampleAnswer,
+    required this.labelId,
+    required this.appId,
+    required this.conceptList,
+    required this.conceptId,
+  });
+
+  @override
+  _BottomSheetLearnContentState createState() => _BottomSheetLearnContentState();
+}
+
+class _BottomSheetLearnContentState extends ConsumerState<BottomSheetLearnContent> {
+  bool isUnlock = false;
+  bool isSave = false;
+  int remainingUses = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateUsageCount();
+  }
+
+  Future<void> _updateUsageCount() async {
+    final sampleAnswerUnlockNotifier = ref.read(sampleAnswerUnlockProvider.notifier);
+    final usageCount = await sampleAnswerUnlockNotifier.getUsageCount(int.parse(widget.labelId), widget.appId);
+    setState(() {
+      remainingUses = 2 - (usageCount as int); // Ensure usageCount is treated as int
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final sampleAnswerUnlockNotifier = ref.read(sampleAnswerUnlockProvider.notifier);
+
+    return DefaultTabController(
+      length: 1,
+      child: Container(
+        decoration: const BoxDecoration(
+            color: Color(0xFFF3F2FC),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight:  Radius.circular(20))
+
+        ),
+        height: MediaQuery.of(context).size.height / 2, // Set height to half of screen height
+        child: Column(
+          children: [
+            // Header with close button
+            const SizedBox(height: 10),
+            // Tab bar
+            TabBar(
+              tabs: [
+                Tab(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: const Text("Product Concepts To Apply", textAlign: TextAlign.center),
+                  ),
+                ),
+
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                children: [
                   ListView.builder(
                     itemCount: widget.conceptList.length,
                     itemBuilder: (context, index) {
@@ -769,7 +999,7 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                         padding: const EdgeInsets.all(10.0),
                         child: InkWell(
                           onTap:  () {
-                           /* GoRouter.of(context)
+                            /* GoRouter.of(context)
                                 .pushNamed(MyAppRouteConst.iqRoute,
                                 pathParameters: {
                                   'appId': '3'
@@ -784,35 +1014,35 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                             height: 48,
                             alignment: Alignment.centerLeft,
                             decoration: BoxDecoration(
-                            color: Colors.white,
+                                color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
                                       color: Colors.grey.withOpacity(0.35),
-                                    blurRadius: 4,
-                                    offset: Offset(0,1)
-                                    
+                                      blurRadius: 4,
+                                      offset: Offset(0,1)
+
                                   )
                                 ],
-                              borderRadius: BorderRadius.circular(10)
+                                borderRadius: BorderRadius.circular(10)
                             ),
                             child: Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                  color: const Color(0xFF3629B7).withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(5)
-                                  ),
-                                  width:25,
-                                  height:24,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFF3629B7).withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(5)
+                                    ),
+                                    width:25,
+                                    height:24,
                                     child: Image.asset('assets/elements/concept.png',)).paddingOnly(right: 20),
-                          
+
                                 Text(
                                   "${widget.conceptList[index]}",
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14
                                   ),
                                 ),
                               ],
@@ -824,29 +1054,31 @@ class _BottomSheetContentState extends ConsumerState<BottomSheetContent> {
                   ),
                   Stack(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          Text(
-                            widget.sampleAnswer,
-                            textAlign: TextAlign.start,
-                            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              fontSize: 12,
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500,
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            Text(
+                              widget.sampleAnswer,
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                fontSize: 12,
+                                color:  Color(0xFF000000),
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ).paddingOnly(top: 5, bottom: 5, left: 15, right: 15),
+                            const SizedBox(height: 20),
+                            isUnlock
+                                ? const SizedBox.shrink()
+                                : BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Adjust blur strength
+                              child: Container(
+                                color: Colors.black.withOpacity(0), // Transparent background
+                              ),
                             ),
-                          ).paddingOnly(top: 5, bottom: 5, left: 15, right: 15),
-                          const SizedBox(height: 20),
-                          isUnlock
-                              ? const SizedBox.shrink()
-                              : BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), // Adjust blur strength
-                            child: Container(
-                              color: Colors.black.withOpacity(0), // Transparent background
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       // Centered button
                       isUnlock

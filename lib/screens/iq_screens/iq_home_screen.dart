@@ -7,7 +7,6 @@ import 'package:product_iq/screens/iq_screens/main_iq_screen.dart';
 import 'package:product_iq/widgets/common_widgets/category_chip.dart';
 import 'package:product_iq/widgets/common_widgets/search_widget.dart';
 import 'package:product_iq/consts.dart';
-import 'package:product_iq/widgets/common_widgets/my_chip.dart';
 import 'package:product_iq/widgets/iq_widgets/main_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

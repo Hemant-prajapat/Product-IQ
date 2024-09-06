@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:product_iq/consts.dart';
-import 'package:product_iq/models/search_result.dart';
 import 'package:product_iq/models/subscription.dart';
 import 'package:product_iq/routes/app_route_consts.dart';
 import 'package:product_iq/screens/crash_error_screen.dart';
@@ -14,7 +13,6 @@ import 'package:product_iq/widgets/home_widgets/offers_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:product_iq/widgets/home_widgets/search_result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class AppsScreen extends StatefulWidget {
@@ -60,6 +58,10 @@ class _AppsScreenState extends State<AppsScreen> {
     getApps();
     super.initState();
   }
+  String removeHash(String input) {
+    String withoutHash = input.replaceAll('#', ''); // Remove #
+    return '0xFF' + withoutHash; // Add 0xFF at the start
+  }
   void getApps() async {
     try {
       if (MyConsts.token == '') {
@@ -80,7 +82,7 @@ class _AppsScreenState extends State<AppsScreen> {
         res = jsonDecode(response.body);
         print("hemant response " + res.toString());
         for (var app in res) {
-          purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
+          purchasedApps.add([app["app_name"], app["id"], app["app_type"],app['active'],removeHash(app['app_color'])]);
           if (app["app_type"] == MyConsts.appTypes[3]) {
             continue;
           }
@@ -96,6 +98,7 @@ class _AppsScreenState extends State<AppsScreen> {
             unPurchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
           }
         }
+        print("purchased apps ${purchasedApps}");
       } else {
         debugPrint(response.body);
         throw Exception('Failed to load apps');
@@ -236,7 +239,7 @@ class _AppsScreenState extends State<AppsScreen> {
                                       final res = jsonDecode(response.body);
                                       if (response.statusCode == 200) {
                                         debugPrint(res.toString());
-                                        final result = SearchResult.fromJson(res);
+                                        // final result = SearchResult.fromJson(res);
                                         setState(() {});
                                       } else {
                                         debugPrint(response.body);
@@ -330,13 +333,16 @@ class _AppsScreenState extends State<AppsScreen> {
                           ),
                           children: [
                             for (int i = 0; i < purchasedApps.length; ++i)
+                              if(purchasedApps[i][3])
                               ZoomTapAnimation(
                                   onTap: () {
                                     print(" purchased $purchasedApps");
                                     if (purchasedApps[i][2] ==
                                         MyConsts.appTypes[0]) {
+                                      MyConsts.mainColor = Color(int.parse(purchasedApps[i][4]));
                                       GoRouter.of(context).pushNamed(
                                           MyAppRouteConst.coachModulesRoute,
+
                                           pathParameters: {
                                             'appId': '${purchasedApps[i][1]}'
                                           });

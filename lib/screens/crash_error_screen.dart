@@ -26,7 +26,7 @@ class _CrashErrorScreenState extends State<CrashErrorScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/elements/reports.png'),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Text(
               "Server Issue,\n Try After Sometime",
               textAlign: TextAlign.center,
@@ -61,7 +61,7 @@ class _CrashErrorScreenState extends State<CrashErrorScreen> {
                         color: MyConsts.primaryColorFrom,
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Image.asset("assets/elements/ratebar.png", width: 15),
                   ],
                 ),

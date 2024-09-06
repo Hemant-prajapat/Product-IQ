@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -10,7 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/answer.dart';
 import '../../routes/app_route_consts.dart';
-
 class ProblemScreen extends StatefulWidget {
   ProblemScreen(
       {super.key,
@@ -55,7 +55,6 @@ class _ProblemScreenState extends State<ProblemScreen> {
     await http.get(previousAnswerUrl, headers: MyConsts.requestHeader);
     if (response.statusCode == 200) {
       final res = jsonDecode(response.body);
-      debugPrint( "tester previous answer "+res.toString());
       List<Answer> previousAnswers = [];
       for (var obj in res) {
         previousAnswers.add(Answer.fromJson(obj));
@@ -100,6 +99,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
         backgroundColor: MyConsts.productColors[3][0],
         //appBar: AppBar(backgroundColor: Colors.transparent,),
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Stack(
             children: [
               InkWell(
@@ -108,9 +108,12 @@ class _ProblemScreenState extends State<ProblemScreen> {
                 },
                 child: Column(
                   children: [
-                    SizedBox(
+                    Container(
+                      constraints: BoxConstraints(
+                        minHeight: deviceHeight*0.2,
+                        maxHeight: widget.problem['level_question'].toString().length==1 ?deviceHeight * 0.3 :deviceHeight * 0.4,
+                      ),
                       width: double.infinity,
-                      height: deviceHeight * 0.4,
                       child: Stack(
                         alignment: Alignment.topCenter,
                         children: [
@@ -123,27 +126,30 @@ class _ProblemScreenState extends State<ProblemScreen> {
                             fit: BoxFit.fill,
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const SizedBox(height: 24),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center ,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   widget.problem['companyLogo'] == '1' ||
                                       widget.problem['companyLogo'] == null
-                                      ? SizedBox.shrink()
+                                      ? const SizedBox.shrink()
                                       : Image.network(
                                     "${MyConsts.imageUrl}${widget.problem['companyLogo']}",
                                     height: 35,
                                     width: 35,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   Text(
                                     widget.problemTitle,
                                     style:
                                     Theme.of(context).textTheme.titleLarge,
+
                                   ),
                                 ],
                               ),
@@ -168,7 +174,8 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                         MyConsts.bgColor.withOpacity(0.5),
                                         thickness: 2,
                                       ).paddingOnly(top:10, bottom: 10),
-                                      Text(
+                                      widget.problem['level_question'].toString().length != 1
+                                          ? Text(
                                         widget.problem['level_question']!,
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
@@ -176,7 +183,8 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                             .bodyLarge!
                                             .copyWith(
                                             fontSize: 16, height: 1.2),
-                                      ),
+                                      ):
+                                            const SizedBox.shrink() ,
                                     ],
                                   ),
                                 ),
@@ -191,7 +199,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                       height: 10,
                     ),
                     Container(
-                      height: deviceHeight * 0.5,
+                      height:  widget.problem['level_question'].toString().length==1 ? deviceHeight * 0.6: deviceHeight * 0.5,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                           color: MyConsts.bgColor,
@@ -200,8 +208,9 @@ class _ProblemScreenState extends State<ProblemScreen> {
                               topRight: Radius.circular(20))),
                       child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 30),
+                              horizontal: 20.0, vertical: 10),
                           child: InputAnswerBox(
+                            question: widget.problem['level_question'],
                             conceptId: widget.problem['topic_id'],
                             conceptList: widget.problem['topics'],
                             completedPercent:

@@ -55,9 +55,9 @@ class ProductSalesScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 12,                    ),
+                      height: 3,),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding:  EdgeInsets.only(bottom:8,right:8,left:8 ),
                       child: Text(
                         index == 1
                             ? MyConsts.coachBulbPoints[0]
@@ -72,7 +72,7 @@ class ProductSalesScreen extends StatelessWidget {
                       children: [
                         for (int i = 1; i <= 3; ++i)
                           Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: SalesBulbPoint(
                               index == 1
                                   ? MyConsts.coachBulbPoints[i]
@@ -93,7 +93,7 @@ class ProductSalesScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(30, 32, 30, 12),
                 child: Text(
                   MyConsts.productName[index - 1].toUpperCase(),
-                  style: Theme.of(context).textTheme.headlineLarge!,
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 29),
                   textAlign: TextAlign.left,
                 ),
               ),

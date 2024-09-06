@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:product_iq/consts.dart';
-import 'package:product_iq/routes/app_route_consts.dart';
 import 'package:product_iq/widgets/worktools_widgets/worktools_tag.dart';
 
 class MainWorktoolsCard extends StatelessWidget {

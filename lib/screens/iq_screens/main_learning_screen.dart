@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:product_iq/widgets/common_widgets/search_widget.dart';
 import 'main_iq_screen.dart';
 import 'package:product_iq/consts.dart';
-import 'package:http/http.dart' as http;
 
 class MainLearningScreen extends StatelessWidget {
   const MainLearningScreen({super.key, required this.title, required this.body, required this.appId});

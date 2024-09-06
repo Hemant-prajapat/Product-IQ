@@ -77,6 +77,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   void _handleGoogleSignIn() async {
     try {
+
       GoogleAuthProvider googleProvider = GoogleAuthProvider();
       var userCredentials = await _auth.signInWithProvider(googleProvider);
       debugPrint(userCredentials.toString());

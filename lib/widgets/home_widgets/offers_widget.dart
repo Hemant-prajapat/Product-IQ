@@ -48,7 +48,7 @@ class OffersWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             fontWeight: FontWeight.w600, fontSize: 28)),
                     Text(
-                      "${originalPrice.toStringAsFixed(2)}",
+                      "${(originalPrice+(originalPrice*0.35)).toStringAsFixed(2)}",
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,

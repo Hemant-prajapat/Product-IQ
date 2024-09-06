@@ -1,20 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:product_iq/screens/help_&_support_screen/help_support_controller.dart';
-import 'package:product_iq/widgets/home_widgets/main_app_screen.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../consts.dart';
-import '../../widgets/common_widgets/my_elevated_button.dart';
 
 class HelpSupportScreen extends GetView<HelpSupportScreen> {
-  final TextEditingController _controller = TextEditingController();
+  // final TextEditingController _controller = TextEditingController();
 
   HelpSupportController helpSupportController =
       Get.put(HelpSupportController());
@@ -39,7 +34,6 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
 
     // Construct the API URL
     final postAnswerUrl = Uri.parse('${MyConsts.baseUrl}/app/add-contactus');
-    print("POST URL Contact US : $postAnswerUrl");
 
     // Prepare the request body
     final requestBody = json.encode({
@@ -55,8 +49,6 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
         body: requestBody,
       );
 
-      print("Request Headers: ${MyConsts.requestHeader}");
-      print("Response Body: ${response.body}");
 
       // Decode the response body
       final res = jsonDecode(response.body);
@@ -95,7 +87,7 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
           automaticallyImplyLeading: false,
           leading: IconButton(onPressed: (){
             Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back)),
+          }, icon: const Icon(Icons.arrow_back)),
           title: Text(
             "Help & Support",
             textAlign: TextAlign.center,
@@ -237,11 +229,10 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
               child:Obx(() {
                 return ListView.builder(
                   controller: helpSupportController.scrollController,
-                  itemCount: helpSupportController.contactUsList.value.length,
+                  itemCount: helpSupportController.contactUsList.length,
                   itemBuilder: (context, index) {
-                    final message = helpSupportController.contactUsList.value[index];
+                    final message = helpSupportController.contactUsList[index];
                     final isOutgoing = message.replay == 'None';
-
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -256,12 +247,12 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                               margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                               padding: const EdgeInsets.all(10.0),
                               decoration: BoxDecoration(
-                                color: Color(0xFFF0EFEF),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: const Radius.circular(0),
-                                  bottomLeft: const Radius.circular(8),
-                                  bottomRight: const Radius.circular(8),
-                                  topRight: const Radius.circular(8),
+                                color: Colors.grey[300],
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(0),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                  topRight: Radius.circular(8),
                                 ),
                               ),
                               child: IntrinsicWidth(
@@ -302,13 +293,13 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                             child: Container(
                               margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
                               padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFD8D4D4),
                                 borderRadius: BorderRadius.only(
-                                  topLeft: const Radius.circular(8),
-                                  bottomLeft: const Radius.circular(8),
-                                  bottomRight: const Radius.circular(8),
-                                  topRight: const Radius.circular(0),
+                                  topLeft: Radius.circular(8),
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8),
+                                  topRight: Radius.circular(0),
                                 ),
                               ),
                               child: IntrinsicWidth(
@@ -340,6 +331,7 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                             ),
                           ),
                         ),
+
                         if (!isOutgoing)
                           Align(
                             alignment: Alignment.centerLeft,
@@ -352,11 +344,11 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                                 padding: const EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
                                   color: Colors.grey[300],
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: const Radius.circular(0),
-                                    bottomLeft: const Radius.circular(8),
-                                    bottomRight: const Radius.circular(8),
-                                    topRight: const Radius.circular(8),
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    bottomLeft: Radius.circular(8),
+                                    bottomRight: Radius.circular(8),
+                                    topRight: Radius.circular(8),
                                   ),
                                 ),
                                 child: IntrinsicWidth(
@@ -366,9 +358,9 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                                       Text(
                                         message.replay,
                                         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                          fontSize: 13,
+                                          fontSize: 15,
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w400,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                       const SizedBox(height: 4),
@@ -388,15 +380,63 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                               ),
                             ),
                           ),
-
                       ],
                     );
                   },
                 );
               })
-
-
-
+            ),
+            Obx(
+               () {
+                return helpSupportController.contactUsList.isEmpty ?Align(
+                    alignment: Alignment.centerLeft,
+                    child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width * 0.75,
+                    ),
+                    child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(0),
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                    ),
+                    ),
+                    child: IntrinsicWidth(
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Text(
+                    "How can I help you ?",
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    ),
+                    ),
+                    const SizedBox(height: 4),
+                    // Align(
+                    //   alignment: Alignment.bottomRight,
+                    //   child: Text(
+                    //     "04:08 PM",
+                    //     style: Theme.of(context).textTheme.caption!.copyWith(
+                    //       fontSize: 10,
+                    //       color: Colors.grey,
+                    //     ),
+                    //   ),
+                    // ),
+                    ],
+                    ),
+                    ),
+                    ),
+                    ),
+                    )
+                        :const SizedBox.shrink();
+              }
             ),
             Padding(
               padding: const EdgeInsets.only(top: 10.0,bottom: 10,right: 15,left: 15),
@@ -422,7 +462,6 @@ class HelpSupportScreen extends GetView<HelpSupportScreen> {
                   hintText: 'Message...',
                   suffixIcon: IconButton(onPressed: () {
                     // postMessage("hemant", context);
-                    print("hemant");
                     if(helpSupportController.textEditingController.text ==""){
                       helpSupportController.showSnackBarMessage("Please Enter Message...", context);
                     }else{

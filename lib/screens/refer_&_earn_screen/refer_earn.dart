@@ -10,11 +10,13 @@ import '../../widgets/common_widgets/my_elevated_button.dart';
 
 class ReferEarnScreen extends GetView<ReferEarnController> {
   // const EditProfileScreen({super.key, required this.details});
-
+ReferEarnController controller = Get.put(ReferEarnController());
   // final Map<String,String> details;
+
 
   @override
   Widget build(BuildContext context) {
+    controller.loadDetails();
     return MainAppScreen(
         title: "Refer & Earn",
         body: SafeArea(
@@ -40,7 +42,7 @@ class ReferEarnScreen extends GetView<ReferEarnController> {
                       softWrap: true, // Allow text to wrap at word boundaries
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontSize:15,
-                        color: MyConsts.productColors[3][0],
+                        color: MyConsts.productColors[3][0] ,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -53,7 +55,7 @@ class ReferEarnScreen extends GetView<ReferEarnController> {
                 children: [
                   Flexible(
                     child: Text(
-                      "When they sign up using your unique code, both of you will get 20% discount.",
+                      "When they sign up using your unique code, both of you will get 35% discount.",
                       maxLines: null,
                       textAlign: TextAlign.center,
                       // Allow the text to wrap and use multiple lines
@@ -79,25 +81,27 @@ class ReferEarnScreen extends GetView<ReferEarnController> {
                 child:Row(
 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("PRO123",style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: 16,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500),),
+                    Obx(
+                            () {
+                        return Text(controller.name.value,style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            fontSize: 16,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500),);
+                      }
+                    ),
                     TextButton(onPressed: (){
                       copyToClipboard(context);
                     }, child: Text("Copy",style: Theme.of(context).textTheme.titleMedium!.copyWith(
                         fontSize: 16,
-                        color: MyConsts.productColors[3][0].withOpacity(0.7),
-                        fontWeight: FontWeight.w500)))
+                        color: MyConsts.productColors[3][0].withOpacity(0.7), fontWeight: FontWeight.w500)))
                   ],
                 ),
               ).paddingOnly(bottom: 20),
-
               MyElevatedButton(
                   shadow: MyConsts.shadow1,
-                  width: double.infinity,
-                  colorFrom: MyConsts.productColors[3][0],
-                  colorTo: MyConsts.productColors[3][0],
+                  width: double.infinity,colorFrom: MyConsts.primaryColorFrom,
+                  colorTo: MyConsts.primaryColorTo,
+
                   child: const Text(
                     "Share",
                     style: TextStyle(
@@ -106,7 +110,7 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         color: MyConsts.bgColor),
                   ),
                   onTap: () {
-                    Share.share("Referral Code - PRO123");
+                    Share.share("Hey buddy, boost your product mindset with the ProductQ app with Self-paced learning, real-time skill report and get end-to-end product lifecycle experience. Use the code ${controller.name} to get a 35% discount now. \n Download the app here: https://www.productq.app/ ");
                   }),
               // EditProfileForm(details: details,),
             ],

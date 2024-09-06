@@ -16,7 +16,7 @@ class ModuleReport extends StatelessWidget {
         body: SingleChildScrollView(
           child: SafeArea(
               minimum:
-                  EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 60),
+                  const EdgeInsets.only(left: 20, right: 20, top: 60, bottom: 60),
               child: Center(
                 child: Column(
                   children: [
@@ -29,7 +29,7 @@ class ModuleReport extends StatelessWidget {
                             MyConsts.productColors[3][0].withOpacity(0.7),
                             MyConsts.productColors[3][0]
                           ])),
-                      child: Center(
+                      child: const Center(
                           child: Text(
                         "🎉",
                         style: TextStyle(fontSize: 48),
@@ -58,7 +58,7 @@ class ModuleReport extends StatelessWidget {
                     const SizedBox(
                       height: 32,
                     ),
-                    SkillGapReport(),
+                    const SkillGapReport(),
                     const SizedBox(
                       height: 32,
                     ),

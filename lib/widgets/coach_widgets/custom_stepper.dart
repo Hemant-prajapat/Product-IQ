@@ -106,6 +106,7 @@ class CustomStepper extends StatelessWidget {
                                 });
                           },
                           child: StepperBox(
+                            isCompleted: challenge.isCompleted,
                             title: challenge.title,
                             subtitle: challenge.subtitle,
                             rating: double.parse("${challenge.rating}"),

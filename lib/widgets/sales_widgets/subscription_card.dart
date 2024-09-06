@@ -73,7 +73,8 @@ class SubscriptionCard extends StatelessWidget {
                   ),
             ),
             Text(
-              "INR ${oldPrice.toStringAsFixed(2)}",
+              "INR ${(newPrice+(newPrice*0.35)).toStringAsFixed(2)}",
+              // "INR ${oldPrice.toStringAsFixed(2)}",
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: MyConsts.primaryDark.withOpacity(0.6),
                   fontWeight: FontWeight.w600,

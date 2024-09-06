@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:product_iq/consts.dart';
 import 'package:product_iq/widgets/home_widgets/main_app_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

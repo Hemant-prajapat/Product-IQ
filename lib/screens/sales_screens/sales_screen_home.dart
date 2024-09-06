@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:product_iq/widgets/sales_widgets/rps_custom_painter.dart';
 import 'package:product_iq/consts.dart';
 import 'package:product_iq/widgets/sales_widgets/sales_text.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SalesScreen extends StatelessWidget {
   const SalesScreen({super.key});

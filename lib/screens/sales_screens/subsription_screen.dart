@@ -261,7 +261,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "INR ${getSelectedPrice(selectedSubscription).toStringAsFixed(2)} / ${selectedPack == "Four-Months" ? "Quaterly" : selectedPack}",
+                "INR ${getSelectedPrice(selectedSubscription).toStringAsFixed(2)} / ${selectedPack == "Four-Months" ? "Yearly" : "Quaterly"}",
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall!

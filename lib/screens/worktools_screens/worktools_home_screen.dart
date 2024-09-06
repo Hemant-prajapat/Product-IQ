@@ -12,7 +12,6 @@ import 'package:product_iq/services/recently_visited_provider.dart';
 import 'package:product_iq/widgets/worktools_widgets/main_card.dart';
 import 'package:product_iq/widgets/common_widgets/category_chip.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../crash_error_screen.dart';
 import 'worktools_main_screen.dart';
 import 'package:product_iq/widgets/common_widgets/search_widget.dart';
 import 'package:http/http.dart' as http;

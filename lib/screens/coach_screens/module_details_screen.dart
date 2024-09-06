@@ -57,19 +57,16 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
     debugPrint(MyConsts.token);
     final appsUrl =
         Uri.parse('${MyConsts.baseUrl}/app/${widget.appId}/module/${widget.moduleId}');
-    print("challenge module api---- ${MyConsts.baseUrl}/app/${widget.appId}/module/${widget.moduleId}");
     http.Response response =
         await http.get(appsUrl, headers: MyConsts.requestHeader);
     var res = jsonDecode(response.body);
-    print("request headerhemant ---- ${response.body}");
+    print(res[1]);
+    // print(res['labels']);
     if(response.statusCode == 200) {
       res = jsonDecode(response.body);
-      print("response----"+res.toString());
         for (var challenge in res) {
           var coachChallenge = CoachChallenge.fromJson(challenge);
           challenges.add(coachChallenge);
-          print("ankit coach challenge ${coachChallenge.labels[0].sampleAnswer}");
-          print("coach challenge ${coachChallenge.labels[0].companyLogo}");
           //sort labels by order
           coachChallenge.labels.sort((a, b) => a.order.compareTo(b.order));
         }
@@ -81,6 +78,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
       isFetching = false;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

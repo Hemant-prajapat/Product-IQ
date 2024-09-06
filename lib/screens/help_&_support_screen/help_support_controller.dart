@@ -17,6 +17,7 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
   var tabIndex = 0.obs;
   final ScrollController scrollController = ScrollController();
   var messageContact= "";
+  var name = "";
   var isSubmitting= false;
   var faqList = <Map<String, dynamic>>[
     {
@@ -80,12 +81,17 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
       'expanded': false
     }
   ].obs;
+  var messages = <Map<String, dynamic>>[
+    {'id':"2",'text': 'Hello! How can I help you today?', 'type': 'incoming','time': DateFormat('hh:mm a').format(DateTime.now())
+    }
+  ].obs;
 
   var openOrderItems = List<bool>.filled(12, false).obs;
 
   void onInit() {
     super.onInit();
-    // contactUsList.add(ContactUsMessage(id: 0, name: "hemant", message: "Hi how i use this thing", replay:"How can I help you  ?"));
+    loadDetails();
+    // contactUsList.add(messages as ContactUsMessage);
     messageHistory();
     ever(contactUsList, (_) => _scrollToBottom());
     tabController= TabController(length: 2, vsync: this);
@@ -108,16 +114,12 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
       }
     });
   }
-  var messages = <Map<String, String>>[
-    {'text': 'Hello! How can I help you today?', 'type': 'incoming','time': DateFormat('hh:mm a').format(DateTime.now())
-    }
-  ].obs;
 
   final TextEditingController textEditingController = TextEditingController();
 
   void sendMessage(String text) {
     if (text.isNotEmpty) {
-      contactUsList.add(ContactUsMessage(id: 0, name: "hemant", message: textEditingController.text, replay: 'None'));
+      contactUsList.add(ContactUsMessage(id: 0, name: name, message: textEditingController.text, replay: 'None'));
       textEditingController.clear();
     }
   }
@@ -129,6 +131,12 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
         openOrderItems[i] = false;
       }
     }
+  }
+
+  void loadDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = prefs.getString('name') ?? '';
+
   }
 
 
@@ -148,10 +156,10 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
     }
     final postAnswerUrl = Uri.parse(
         '${MyConsts.baseUrl}/app/add-contactus');
-    print("$postAnswerUrl");
+    // print("$postAnswerUrl");
     http.Response response = await http.post(postAnswerUrl,
-        headers: MyConsts.requestHeader, body: json.encode({'message': textEditingController.text,'name':'hemant'}));
-    print("response${ response.body}");
+        headers: MyConsts.requestHeader, body: json.encode({'message': textEditingController.text,'name':name}));
+    // print("response${ response.body}");
     final res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       sendMessage(textEditingController.text);
@@ -191,15 +199,14 @@ class HelpSupportController extends GetxController with SingleGetTickerProviderM
     }
     final postAnswerUrl = Uri.parse(
         '${MyConsts.baseUrl}/app/view-contactus');
-    print("$postAnswerUrl");
     http.Response response = await http.get(postAnswerUrl,
         headers: MyConsts.requestHeader );
     print("message history----response${response.body}");
     final res = jsonDecode(response.body);
     if (response.statusCode == 200) {
       contactUsList1.value = contactUsMessageFromJson(response.body);
-      print(contactUsList.value);
-      contactUsList.addAll(contactUsList1.value);
+      print(contactUsList);
+      contactUsList.addAll(contactUsList1);
 
         isSubmitting = false;
 

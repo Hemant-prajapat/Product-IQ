@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CustomPercentIndicator extends StatelessWidget {
   const CustomPercentIndicator(
@@ -68,23 +67,6 @@ class CustomPercentIndicator extends StatelessWidget {
         // Add more titles and progress containers as needed
       ],
     );
-    /*CircularPercentIndicator(
-      lineWidth: 6,
-      radius: 48,
-      percent: percent,
-      progressColor: progressColor,
-      circularStrokeCap: CircularStrokeCap.round,
-      center: SizedBox(
-        width: 72,
-        child: Text(
-          centerText,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
-      ),
-    )*/;
+
   }
 }

@@ -3,7 +3,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 import 'package:sqflite/sqflite.dart' as sql;
 import '../models/sample_answer_unlock_model.dart';
-import 'sample_answer_unlock.dart'; // Import the SampleAnswerUnlock model
 
 class SampleAnswerUnlockNotifier extends StateNotifier<List<SampleAnswerUnlock>> {
   SampleAnswerUnlockNotifier() : super([]);

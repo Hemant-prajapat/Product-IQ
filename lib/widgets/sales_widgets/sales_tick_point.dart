@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:product_iq/consts.dart';
 
 class SalesTickPoint extends StatelessWidget {
