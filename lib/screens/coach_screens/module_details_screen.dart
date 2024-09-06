@@ -82,6 +82,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     // print("hemant-- ${challenges[1].labels[3].companyLogo!}");

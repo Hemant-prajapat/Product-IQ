@@ -26,6 +26,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
       {super.key,
       required this.labelId,
       required this.hint,
+      required this.question,
       required this.conceptId,
       required this.sampleAnswer,
       required this.totalPercent,
@@ -36,6 +37,7 @@ class InputAnswerBox extends ConsumerStatefulWidget {
 
   final String labelId;
   final String hint;
+  final String question;
   final String sampleAnswer;
   final String moduleId;
   final List<dynamic> conceptList;
@@ -60,6 +62,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
   String _lastWords = '';
   var isLoading = false;
   var answerId = 0;
+  var isMic= false;
 
   @override
   void initState() {
@@ -91,9 +94,10 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       textColor:Colors.white,
       fontSize: 14.0,
     );
+    isMic = true;
+
     setState(() {});
   }
-
   void _stopListening() async {
     await _speechToText.stop();
     Fluttertoast.showToast(
@@ -104,6 +108,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
       textColor:Colors.white,
       fontSize: 14.0,
     );
+    isMic= false;
     setState(() {});
   }
 
@@ -353,7 +358,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                             width: 3,
                           ),
                           Text(
-                            widget.appId!= 5 ? "Hint": "Assumptions",
+                            "Hint",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -375,7 +380,7 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
             ),
             TextField(
               controller: _answerController,
-              maxLines: 7,
+              maxLines: widget.question.length==1? 10:7,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -415,7 +420,9 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     }
                   },
                   child: Container(
-                      width: MediaQuery.of(context).size.width * 35 / 100,
+                      width: isMic? MediaQuery.of(context).size.width * 33 / 100:MediaQuery.of(context).size.width * 33 / 100,
+
+                      // width: MediaQuery.of(context).size.width * 35 / 100,
                       padding:
                           const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       decoration: BoxDecoration(
@@ -458,11 +465,12 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                     }
                   },
                   child: Container(
-                    width: 60, // Adjust the width as needed
-                    height: 60, // Adjust the height as needed
+                    width: 75, // Adjust the width as needed
+                    height: 75, // Adjust the height as needed
                     decoration: BoxDecoration(
                       color: Colors.white, // Background color
                       shape: BoxShape.circle,
+                      border: Border.all(color:isMic?Colors.green:Colors.transparent),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -473,16 +481,16 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.mic,
-                      size: 22, // Adjust the size of the icon
+                      size: isMic?28:26, // Adjust the size of the icon
                       color: Colors.black,
                     ),
                   ),
                 ),
                 MyElevatedButton(
                     shadow: MyConsts.shadow1,
-                    width: MediaQuery.of(context).size.width * 34 / 100,
+                    width:MediaQuery.of(context).size.width * 32 / 100,
                     colorFrom: MyConsts.productColors[3][0],
                     colorTo: MyConsts.productColors[3][0],
                     child: isSubmitting

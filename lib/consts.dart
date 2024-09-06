@@ -5,8 +5,10 @@ class MyConsts {
 static const iqIndustryColor = Color(0xFF082AA8);
 // TEXTS
   static const appName = "ProductQ";
-  static const salesScreenText = "Want to stimulate hands-on Product Manager Experience across levels from couch?";
+  static const salesScreenText = "Want to simulate hands-on Product Manager Experience across levels from couch?";
   static const freeText = "GET FOR FREE";
+  static const mColor = "";
+  static var  mainColor = Color(0xFF082AA8);
   static final productName = [
     "Product Industry Trainer",
     "PRODUCT Interview Coach",
@@ -65,6 +67,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
     'assets/elements/coach.svg',
     'assets/elements/worktools.svg',
     'assets/elements/iq.svg',
+    'assets/elements/interview.svg',
   ];
   static const coachBulbPoints = [
     "New or want to grow Product Management ?",
@@ -79,7 +82,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
   ];
   static const coachTrainingPoints = [
     "PM interview questions from Meta, Google, Airbnb, Amazon & more",
-    "Practice the questions with real-time guidance 24 X 7",
+    "Practice the questions with Real-time guidance 24 X 7",
     "Get report and areas to improve for each assignment",
   ];
 
@@ -91,7 +94,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
   ];
   static const interviewTickPoints = [
     "PM interview questions from Meta, Google, Airbnb, Amazon & more",
-    "Practice the questions with real-time guidance 24 X 7",
+    "Real-time guidance 24 X 7",
     "Get report and areas to improve for each assignment"
   ];
 
@@ -185,6 +188,7 @@ static const iqIndustryColor = Color(0xFF082AA8);
   static const primaryColorFrom = Color(0xFF6E6CCE);
   static const primaryColorTo = Color(0xFF514ED7);
   static const productColors = [
+    // 3629B7
     [Color(0xFF3629B7), Color(0xFF3629B7)],
     [Color(0xFF998EFF), Color(0xFF998EFF)],
     [Color(0xFF337A73), Color(0xFF337A73)],

@@ -27,7 +27,7 @@ class AppCard extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: isPurchased
-                    ? MyConsts.productColors[pid==0?3:pid]
+                    ? MyConsts.productColors[ productName == "Product Industry Trainer" ? 0: productName == "Product Interview Coach" ? 3 : pid ]
                     : [Colors.grey, Colors.grey])),
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0, top: 20),
@@ -59,8 +59,8 @@ class AppCard extends StatelessWidget {
                           Colors.transparent, BlendMode.saturation)
                       : const ColorFilter.mode(Colors.grey, BlendMode.saturation),
                   child: SvgPicture.asset(
-                    MyConsts.productIcons[pid],
-                    width: deviceWidth*0.12,
+                    MyConsts.productIcons[productName == "Product Industry Trainer" ? 3: productName == "Product Interview Coach" ? 0 : pid ],
+                    width: deviceWidth*0.11,
                   ),
                 ),
               )

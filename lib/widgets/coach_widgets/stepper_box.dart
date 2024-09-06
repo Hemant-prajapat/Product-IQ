@@ -9,6 +9,16 @@ class StepperBox extends StatelessWidget {
   final double? rating;
   final bool isLocked;
 
+  Color getColorByRating(double rating) {
+    if (rating <= 0.5) {
+      return MyConsts.primaryRed;
+    }
+    if (rating <= 0.75) {
+      return MyConsts.primaryOrange;
+    }
+    return MyConsts.primaryGreen;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +54,7 @@ class StepperBox extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10)
                     ),
                     width: 38,height: 20,
-                  child: Text( rating.toString(),style: TextStyle(fontWeight: FontWeight.w600,color: Colors.green,fontSize: 12),),
+                  child: Text( rating.toString(),style: TextStyle(fontWeight: FontWeight.w600,color: getColorByRating(double.parse(rating.toString())/10),fontSize: 12),),
                   )
               ],
             ),

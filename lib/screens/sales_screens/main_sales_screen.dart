@@ -26,7 +26,8 @@ class _MainSalesScreenState extends State<MainSalesScreen> {
 
   @override
   void initState() {
-    startAutoScroll();
+    // startAutoScroll();
+
     _pageController = PageController(initialPage: 0);
     onLaunch();
     super.initState();

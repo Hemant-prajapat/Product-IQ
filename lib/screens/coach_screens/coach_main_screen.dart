@@ -19,7 +19,7 @@ class CoachMainScreen extends StatelessWidget {
             appBarTitle,
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          backgroundColor: MyConsts.productColors[3][0],
+          backgroundColor: appBarTitle=="Product Industry Trainer"? MyConsts.productColors[0][0]:MyConsts.productColors[3][0],
         ),
         backgroundColor: bgColor,
         body: body);

@@ -110,7 +110,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                   children: [
                     SizedBox(
                       width: double.infinity,
-                      height: deviceHeight * 0.4,
+                      height: widget.problem['level_question'].toString().length==1 ?deviceHeight * 0.3 :deviceHeight * 0.4,
                       child: Stack(
                         alignment: Alignment.topCenter,
                         children: [
@@ -168,7 +168,8 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                         MyConsts.bgColor.withOpacity(0.5),
                                         thickness: 2,
                                       ).paddingOnly(top:10, bottom: 10),
-                                      Text(
+                                      widget.problem['level_question'].toString().length != 1
+                                          ? Text(
                                         widget.problem['level_question']!,
                                         textAlign: TextAlign.center,
                                         style: Theme.of(context)
@@ -176,7 +177,8 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                             .bodyLarge!
                                             .copyWith(
                                             fontSize: 16, height: 1.2),
-                                      ),
+                                      ):
+                                            SizedBox.shrink() ,
                                     ],
                                   ),
                                 ),
@@ -191,7 +193,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                       height: 10,
                     ),
                     Container(
-                      height: deviceHeight * 0.5,
+                      height:  widget.problem['level_question'].toString().length==1 ? deviceHeight * 0.6: deviceHeight * 0.5,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                           color: MyConsts.bgColor,
@@ -202,6 +204,7 @@ class _ProblemScreenState extends State<ProblemScreen> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 30),
                           child: InputAnswerBox(
+                            question: widget.problem['level_question'],
                             conceptId: widget.problem['topic_id'],
                             conceptList: widget.problem['topics'],
                             completedPercent:

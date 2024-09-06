@@ -120,7 +120,7 @@ class CustomStepper2 extends StatelessWidget {
                           child: StepperBox(
                             title: "",
                             subtitle: challenge.subtitle,
-                            rating: double.parse("${challenge.rating ?? 0}"),
+                            rating: double.parse("${challenge.rating ?? 0}") ,
                             isLocked: challenge.isLocked,
                           ),
                         ),
