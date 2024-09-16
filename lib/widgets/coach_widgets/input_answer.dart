@@ -293,234 +293,232 @@ class _InputAnswerBoxState extends ConsumerState<InputAnswerBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: InkWell(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Submit Answer",
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      fontSize: 17,
-                      color: MyConsts.primaryDark,
-                      fontWeight: FontWeight.w700),
-                ),
-                Row(
-                  children: [
-
-                    InkWell(
-                      onTap: () {
-                        showBottomSheet(context);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/elements/book.png",
-                            width: 17,
-                          ),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "Learn Concepts",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                    fontSize: 12,
-                                    color: MyConsts.productColors[3][0],
-                                    fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        showBottomSheet2(context);
-                        // showMyDialog(context,widget.hint);
-                      },
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            "assets/elements/bulb2.png",
-                            width: 17,
-                          ),
-                          const SizedBox(
-                            width: 3,
-                          ),
-                          Text(
-                            "Hint",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                fontSize: 12,
-                                color: MyConsts.productColors[3][0],
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ),
-
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            TextField(
-              controller: _answerController,
-              maxLines: widget.question.length==1? 11:9,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: MyConsts.primaryDark),
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: MyConsts.productColors[3][0].withOpacity(0.15),
-                hintText: "Type your answer or tap the microphone to speak",
-                hintStyle: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(color: MyConsts.primaryDark),
+    return InkWell(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Submit Answer",
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: 17,
+                    color: MyConsts.primaryDark,
+                    fontWeight: FontWeight.w700),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
+              Row(
+                children: [
 
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () async{
-
-                    if(_answerController.text.isNotEmpty){
-                    setState(() {
-                      isSave = true;
-                    });
-                    // Replace with your save draft logic
-                    await saveDraftAnswer();
-                    setState(() {
-                      isSave = false;
-                    });
-                    }else{
-                      _showSnackBarMessage("Please enter your answer");
-                    }
-                  },
-                  child: Container(
-                      width: isMic? MediaQuery.of(context).size.width * 33 / 100:MediaQuery.of(context).size.width * 33 / 100,
-
-                      // width: MediaQuery.of(context).size.width * 35 / 100,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            const BoxShadow(
-                                color: Color.fromRGBO(100, 100, 111, 0.2),
-                                offset: Offset(0, 4),
-                                blurRadius: 16)
-                          ],
-                          border: Border.all(color: MyConsts.productColors[3][0]),
-                          gradient: const LinearGradient(
-                              colors: [Colors.white, Colors.white],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter)),
-                      child: Center(
-                        child: isSave
-                            ? const SizedBox(
-                                height: 18,
-                                width: 18,
-                                child: CircularProgressIndicator(
-                                  color: MyConsts.bgColor,
-                                  strokeWidth: 2,
-                                ),
-                              )
-                            : Text(
-                                "SAVE DRAFT",
-                                style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.bold,
-                                    color: MyConsts.productColors[3][0]),
-                              ),
-                      )),
-                ),
-
-                InkWell(
-                  onTap: () {
-                    if (_speechEnabled) {
-                      _speechToText.isListening ? _stopListening() : _startListening();
-                    }
-                  },
-                  child: Container(
-                    width: 75, // Adjust the width as needed
-                    height: 75, // Adjust the height as needed
-                    decoration: BoxDecoration(
-                      color: Colors.white, // Background color
-                      shape: BoxShape.circle,
-                      border: Border.all(color:isMic?Colors.green:Colors.transparent),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 4,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
+                  InkWell(
+                    onTap: () {
+                      showBottomSheet(context);
+                    },
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "assets/elements/book.png",
+                          width: 17,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          "Learn Concepts",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  fontSize: 12,
+                                  color: MyConsts.productColors[3][0],
+                                  fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
-                    child: Icon(
-                      Icons.mic,
-                      size: isMic?28:26, // Adjust the size of the icon
-                      color: Colors.black,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      showBottomSheet2(context);
+                      // showMyDialog(context,widget.hint);
+                    },
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          "assets/elements/bulb2.png",
+                          width: 17,
+                        ),
+                        const SizedBox(
+                          width: 3,
+                        ),
+                        Text(
+                          "Hint",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                              fontSize: 12,
+                              color: MyConsts.productColors[3][0],
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                MyElevatedButton(
-                    shadow: MyConsts.shadow1,
-                    width:MediaQuery.of(context).size.width * 32 / 100,
-                    colorFrom: MyConsts.productColors[3][0],
-                    colorTo: MyConsts.productColors[3][0],
-                    child: isSubmitting
-                        ? const SizedBox(
-                            height: 18,
-                            width: 18,
-                            child: CircularProgressIndicator(
-                              color: MyConsts.bgColor,
-                              strokeWidth: 2,
-                            ),
-                          )
-                        : const Text(
-                            "SUBMIT",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: MyConsts.bgColor),
-                          ),
-                    onTap: () {
-                      setState(() {
-                        isSubmitting = true;
-                      });
 
-                      _postAnswer(_answerController.text);
-                    }),
-              ],
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 8,
+          ),
+          TextField(
+            controller: _answerController,
+            maxLines: widget.question.length==1? 11:9,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(color: MyConsts.primaryDark),
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: MyConsts.productColors[3][0].withOpacity(0.15),
+              hintText: "Type your answer or tap the microphone to speak",
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: MyConsts.primaryDark),
             ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
 
-          ],
-        ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () async{
+
+                  if(_answerController.text.isNotEmpty){
+                  setState(() {
+                    isSave = true;
+                  });
+                  // Replace with your save draft logic
+                  await saveDraftAnswer();
+                  setState(() {
+                    isSave = false;
+                  });
+                  }else{
+                    _showSnackBarMessage("Please enter your answer");
+                  }
+                },
+                child: Container(
+                    width: isMic? MediaQuery.of(context).size.width * 33 / 100:MediaQuery.of(context).size.width * 33 / 100,
+
+                    // width: MediaQuery.of(context).size.width * 35 / 100,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        boxShadow: [
+                          const BoxShadow(
+                              color: Color.fromRGBO(100, 100, 111, 0.2),
+                              offset: Offset(0, 4),
+                              blurRadius: 16)
+                        ],
+                        border: Border.all(color: MyConsts.productColors[3][0]),
+                        gradient: const LinearGradient(
+                            colors: [Colors.white, Colors.white],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter)),
+                    child: Center(
+                      child: isSave
+                          ? const SizedBox(
+                              height: 18,
+                              width: 18,
+                              child: CircularProgressIndicator(
+                                color: MyConsts.bgColor,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : Text(
+                              "SAVE DRAFT",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: MyConsts.productColors[3][0]),
+                            ),
+                    )),
+              ),
+
+              InkWell(
+                onTap: () {
+                  if (_speechEnabled) {
+                    _speechToText.isListening ? _stopListening() : _startListening();
+                  }
+                },
+                child: Container(
+                  width: 75, // Adjust the width as needed
+                  height: 75, // Adjust the height as needed
+                  decoration: BoxDecoration(
+                    color: Colors.white, // Background color
+                    shape: BoxShape.circle,
+                    border: Border.all(color:isMic?Colors.green:Colors.transparent),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.mic,
+                    size: isMic?28:26, // Adjust the size of the icon
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              MyElevatedButton(
+                  shadow: MyConsts.shadow1,
+                  width:MediaQuery.of(context).size.width * 32 / 100,
+                  colorFrom: MyConsts.productColors[3][0],
+                  colorTo: MyConsts.productColors[3][0],
+                  child: isSubmitting
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(
+                            color: MyConsts.bgColor,
+                            strokeWidth: 2,
+                          ),
+                        )
+                      : const Text(
+                          "SUBMIT",
+                          style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: MyConsts.bgColor),
+                        ),
+                  onTap: () {
+                    setState(() {
+                      isSubmitting = true;
+                    });
+
+                    _postAnswer(_answerController.text);
+                  }),
+            ],
+          ),
+
+        ],
       ),
     );
   }

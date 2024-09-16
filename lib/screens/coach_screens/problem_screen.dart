@@ -114,7 +114,9 @@ class _ProblemScreenState extends State<ProblemScreen> {
                         maxHeight: widget.problem['level_question'].toString().length==1 ?deviceHeight * 0.3 :deviceHeight * 0.4,
                       ),
                       width: double.infinity,
-                      child: Stack(
+
+                      height: widget.problem['level_question'].toString().length==1 ?deviceHeight * 0.3 :deviceHeight * 0.4,
+                        child: Stack(
                         alignment: Alignment.topCenter,
                         children: [
                           Image.asset(
@@ -184,7 +186,9 @@ class _ProblemScreenState extends State<ProblemScreen> {
                                             .copyWith(
                                             fontSize: 16, height: 1.2),
                                       ):
+
                                             const SizedBox.shrink() ,
+                                            SizedBox.shrink() ,
                                     ],
                                   ),
                                 ),

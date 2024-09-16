@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:product_iq/screens/refer_&_earn_screen/refer_earn_controller.dart';
 import 'package:product_iq/widgets/home_widgets/main_app_screen.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../consts.dart';
 import '../../widgets/common_widgets/my_elevated_button.dart';
@@ -89,6 +90,10 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             fontWeight: FontWeight.w500),);
                       }
                     ),
+                    Text(controller.name.value,style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontSize: 16,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500),),
                     TextButton(onPressed: (){
                       copyToClipboard(context);
                     }, child: Text("Copy",style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -110,7 +115,8 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         color: MyConsts.bgColor),
                   ),
                   onTap: () {
-                    Share.share("Hey buddy, boost your product mindset with the ProductQ app with Self-paced learning, real-time skill report and get end-to-end product lifecycle experience. Use the code ${controller.name} to get a 35% discount now. \n Download the app here: https://www.productq.app/ ");
+                    Share.share("Hey buddy, boost your product mindset with the ProductQ app with Self-paced learning, real-time skill report and get end-to-end product lifecycle experience. Use the code ${controller.name.value} to get a 35% discount now. \n Download the app here: https://www.productq.app/ ");
+                    // Share.share("Hey buddy, boost your product mindset with the ProductQ app with Self-paced learning, real-time skill report and get end-to-end product lifecycle experience. Use the code ${controller.name} to get a 30% discount now. \n Download the app here: https://www.productq.app/ ");
                   }),
               // EditProfileForm(details: details,),
             ],

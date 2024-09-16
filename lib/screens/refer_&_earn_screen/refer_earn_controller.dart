@@ -15,6 +15,7 @@ void init(){
   void loadDetails() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     name.value= prefs.getString('email') ?? '';
+    email = prefs.getString('email') ?? '';
     phoneNum = prefs.getString('phone_no') ?? '';
     jobTitle = prefs.getString('job_title') ?? '';
     company = prefs.getString('company') ?? '';
