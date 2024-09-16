@@ -84,16 +84,15 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Obx(
                             () {
-                        return Text(controller.name.value,style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 16,
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500),);
+                        return Flexible(
+                          child: Text(controller.name.value,maxLines: 1,softWrap: true,overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                              fontSize: 16,
+                              color: Colors.black54,
+                              fontWeight: FontWeight.w500),),
+                        );
                       }
                     ),
-                    Text(controller.name.value,style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: 16,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500),),
+
                     TextButton(onPressed: (){
                       copyToClipboard(context);
                     }, child: Text("Copy",style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -124,7 +123,7 @@ mainAxisAlignment: MainAxisAlignment.spaceBetween,
         ));
   }
   void copyToClipboard(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: "PRO123")).then((_) {
+    Clipboard.setData(ClipboardData(text: controller.name.value)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Referral code copied to clipboard!')),
       );
