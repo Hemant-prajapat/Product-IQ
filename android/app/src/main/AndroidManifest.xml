@@ -13,7 +13,7 @@
     <application
         android:label="ProductQ"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/applogo"
         android:enableOnBackInvokedCallback="false"
         android:usesCleartextTraffic="true">
         <activity

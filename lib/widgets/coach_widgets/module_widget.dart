@@ -3,9 +3,10 @@ import 'package:product_iq/consts.dart';
 
 class ModuleWidget extends StatelessWidget {
   const ModuleWidget(
-      {super.key, required this.title, required this.percentCompleted});
+      {super.key, this.appTitle, required this.title, required this.percentCompleted});
 
   final String title;
+   final String ? appTitle;
   final double percentCompleted;
 
   @override
@@ -27,7 +28,7 @@ class ModuleWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
-                color: MyConsts.productColors[3][0],
+                color:appTitle=="Product Industry Trainer"? MyConsts.productColors[0][0]:MyConsts.productColors[3][0],
               ),
               height: deviceWidth * 0.13,
               width: deviceWidth * 0.13,
@@ -64,7 +65,7 @@ class ModuleWidget extends StatelessWidget {
                   height: 10,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: MyConsts.productColors[3][0],
+                    color:appTitle=="Product Industry Trainer"? MyConsts.productColors[0][0]:MyConsts.productColors[3][0],
                   ),
                 ),
               ],

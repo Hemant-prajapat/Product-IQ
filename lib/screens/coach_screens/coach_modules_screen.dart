@@ -289,6 +289,7 @@ class _CoachModulesScreenState extends ConsumerState<CoachModulesScreen> {
                                   child: Opacity(
                                     opacity: module.isAllowed ? 1.0 : 0.5,
                                     child: ModuleWidget(
+                                      appTitle: MyConsts.productNameMap[widget.appId],
                                       title: module.moduleName,
                                       percentCompleted: module.totalPercent == 0
                                           ? 0.0

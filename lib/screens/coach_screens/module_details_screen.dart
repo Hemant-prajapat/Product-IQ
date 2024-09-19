@@ -92,7 +92,9 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: MyConsts.productColors[3][0],
+                    color:MyConsts.productNameMap[widget.appId]=="Product Industry Trainer"? MyConsts.productColors[0][0]:MyConsts.productColors[3][0],
+
+                    // color: MyConsts.productColors[3][0],
                     borderRadius: BorderRadius.circular(12)),
                 child: Padding(
                   padding:
@@ -136,6 +138,7 @@ class _ModuleDetailsScreenState extends State<ModuleDetailsScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: CustomStepper2(
+                              apptitle: MyConsts.productNameMap[widget.appId],
                               completedPercent: widget.completedPercent.toString(),
                               totalPercent: widget.totalPercent.toString(),
                               appId: widget.appId,

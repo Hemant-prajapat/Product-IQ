@@ -10,6 +10,7 @@ class CustomStepper2 extends StatelessWidget {
   const CustomStepper2(
       {super.key,
       required this.heading,
+      this.apptitle,
       required this.challenges,
       required this.question,
       required this.totalPercent,
@@ -19,6 +20,7 @@ class CustomStepper2 extends StatelessWidget {
       required this.appId});
 
   final String heading;
+  final String ? apptitle;
   final List<Challenge> challenges;
   final String question;
   final String problemId;
@@ -44,14 +46,16 @@ class CustomStepper2 extends StatelessWidget {
     return Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            color: MyConsts.coachLight, borderRadius: BorderRadius.circular(6)),
+            color: MyConsts.coachLight,
+            borderRadius: BorderRadius.circular(6)),
         child: Padding(
             padding: const EdgeInsets.all(18.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                heading,
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                Text(
+                  heading,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+
                     color: MyConsts.productColors[3][0],
                     fontSize: 18,
                     height: 1.3),
@@ -65,7 +69,7 @@ class CustomStepper2 extends StatelessWidget {
                     const SizedBox(height: 6,),
                     for (var challenge in challenges)
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 12.0,),
+                        padding: const EdgeInsets.only(bottom: 12.0),
                         child: GestureDetector(
                           onTap: () {
                             if (challenge.isLocked) {
@@ -118,6 +122,7 @@ class CustomStepper2 extends StatelessWidget {
                                 });
                           },
                           child: StepperBox(
+                            apptitle: apptitle,
                             isCompleted: challenge.isCompleted,
                             title: "",
                             subtitle: challenge.subtitle,

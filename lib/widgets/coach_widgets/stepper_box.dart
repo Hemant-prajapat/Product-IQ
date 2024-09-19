@@ -3,10 +3,11 @@ import 'package:product_iq/consts.dart';
 
 class StepperBox extends StatelessWidget {
   const StepperBox(
-      {super.key,required this.isCompleted, required this.title, required this.subtitle, this.rating, required this.isLocked});
+      {super.key,this.apptitle,required this.isCompleted, required this.title, required this.subtitle, this.rating, required this.isLocked});
   final String title;
   final bool isCompleted;
   final String subtitle;
+  final String ?apptitle;
   final double? rating;
   final bool isLocked;
 
@@ -27,7 +28,9 @@ class StepperBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          color: MyConsts.productColors[3][0].withOpacity(isLocked ? 0.7 : 1),
+          color:apptitle=="Product Industry Trainer"? MyConsts.productColors[0][0].withOpacity(isLocked ? 0.7 : 1):MyConsts.productColors[3][0].withOpacity(isLocked ? 0.7 : 1),
+
+          // color: MyConsts.productColors[3][0].withOpacity(isLocked ? 0.7 : 1),
           borderRadius: BorderRadius.circular(8)),
       child: Padding(
         padding: const EdgeInsets.only(left: 64.0, top: 18, bottom: 18, right: 12),
