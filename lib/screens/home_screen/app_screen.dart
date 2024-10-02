@@ -80,11 +80,11 @@ class _AppsScreenState extends State<AppsScreen> {
         res = jsonDecode(response.body);
         print("hemant response " + res.toString());
         for (var app in res) {
-          purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
           if (app["app_type"] == MyConsts.appTypes[3]) {
             continue;
           }
           if (app["is_subscribed"] == true) {
+            purchasedApps.add([app["app_name"], app["id"], app["app_type"]]);
             if (app['app_type'] == MyConsts.appTypes[0]) {
               MyConsts.isCoachSubscribed = true;
             } else if (app['app_type'] == MyConsts.appTypes[2]) {
