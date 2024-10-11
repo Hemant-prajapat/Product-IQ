@@ -6,9 +6,9 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 
 class SearchWidget extends StatefulWidget {
-  SearchWidget({super.key, required this.focus, required this.hintText, this.onSubmitted, this.searchParam});
-
+  SearchWidget({super.key, required this.focus, required this.hintText, this.onSubmitted, this.searchParam,this.isEnabled});
   var focus;
+  final bool  ? isEnabled;
   final String hintText;
   void Function(String)? onSubmitted;
   final String? searchParam;
@@ -74,6 +74,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
+      enabled: widget.isEnabled ?? true,
       focusNode: focusNode,
       controller: _searchController,
       leading: const Icon(Icons.search),

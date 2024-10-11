@@ -208,13 +208,15 @@ class _AppsScreenState extends State<AppsScreen> {
                   : offers.isEmpty
                           ? Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                              child: GestureDetector(
+                              child: InkWell(
                                   onTap: () {
+
                                     GoRouter.of(context)
                                         .pushNamed(MyAppRouteConst.searchRoute);
                                   },
                                   child: SearchWidget(
-                                    focus: false,
+                                    isEnabled: false,
+                                    focus: true,
                                     hintText: "Search Now",
                                     onSubmitted: (value) async {
                                       isSearch = true;
@@ -239,9 +241,127 @@ class _AppsScreenState extends State<AppsScreen> {
                                           searchUrl,
                                           headers: MyConsts.requestHeader);
                                       final res = jsonDecode(response.body);
+                                      print("ankit is -----------${response.body}");
                                       if (response.statusCode == 200) {
+
                                         debugPrint(res.toString());
                                         final result = SearchResult.fromJson(res);
+                                        for (Module module in result.modules ?? []) {
+                                          headings.add(module.moduleName);
+                                          subheadings.add(module.description);
+                                          type.add(MyConsts.chipsText[0]);
+                                          funcs.add(() {
+                                            GoRouter.of(context)
+                                                .pushNamed(MyAppRouteConst.coachModulesInfoRoute,
+                                                pathParameters: {
+                                                  'moduleTitle': module.moduleName,
+                                                  'id': module.id.toString(),
+                                                  'appId': module.appId.toString()
+                                                },
+                                                extra: 0.0);
+                                          });
+                                        }
+                                        for (Challenge challenge in result.challenges ?? []) {
+                                          headings.add(challenge.challengeName);
+                                          subheadings.add(challenge.moduleName);
+                                          type.add(MyConsts.chipsText[1]);
+                                          funcs.add(() {
+                                            GoRouter.of(context)
+                                                .pushNamed(MyAppRouteConst.coachModulesInfoRoute,
+                                                pathParameters: {
+                                                  'moduleTitle': challenge.moduleName,
+                                                  'id': challenge.module.toString(),
+                                                  'appId': challenge.appId.toString()
+                                                },
+                                                extra: 0.0);
+                                          });
+                                        }
+
+                                        for (Label label in result.labels ?? []) {
+                                          headings.add(label.labelName);
+                                          subheadings.add(label.levelQuestion);
+                                          type.add(MyConsts.chipsText[2]);
+                                          funcs.add(() {
+                                            GoRouter.of(context).pushNamed(
+                                                MyAppRouteConst.coachProblemRoute,
+                                                pathParameters: {
+                                                  'problemTitle': label.labelName,
+                                                  'problemId': label.id.toString(),
+                                                  'appId': label.appId.toString()
+                                                },
+                                                extra:
+                                                '${label.challengeName}.\n ${label.levelQuestion}');
+                                          });
+                                        }
+
+                                        for (Category category in result.categories ?? []) {
+                                          headings.add(category.name);
+                                          subheadings.add(category.description);
+                                          type.add(MyConsts.chipsText[3]);
+                                          funcs.add(() {
+                                            GoRouter.of(context)
+                                                .pushNamed(MyAppRouteConst.worktoolsRoute,
+                                                extra: category.id,
+                                                pathParameters: {'appId': category.appId.toString()});
+                                          });
+                                        }
+
+                                        for (Skill skill in result.skills ?? []) {
+                                          headings.add(skill.name);
+                                          subheadings.add(skill.description);
+                                          type.add(MyConsts.chipsText[4]);
+                                          funcs.add(() {
+                                            GoRouter.of(context).pushNamed(
+                                                MyAppRouteConst.worktoolsDetailsRoute,
+                                                pathParameters: {
+                                                  'id': skill.categorie.toString(),
+                                                  'cardTitle': skill.name,
+                                                  'appId': skill.appId.toString()
+                                                });
+                                          });
+                                        }
+
+                                        for (Section section in result.sections ?? []) {
+                                          headings.add(section.name);
+                                          subheadings.add("Product IQ");
+                                          type.add(MyConsts.chipsText[5]);
+                                          funcs.add(() {
+                                            GoRouter.of(context).pushNamed(MyAppRouteConst.iqRoute,
+                                                extra: section.id,
+                                                pathParameters: {'appId': section.appId.toString()});
+                                          });
+                                        }
+
+                                        for (Topic topic in result.topics ?? []) {
+                                          headings.add(topic.name);
+                                          subheadings.add(topic.sectionName);
+                                          type.add(MyConsts.chipsText[6]);
+                                          funcs.add(() {
+                                            GoRouter.of(context).pushNamed(
+                                                MyAppRouteConst.iqLearningsRoute,
+                                                pathParameters: {
+                                                  'index': topic.section.toString(),
+                                                  'title': topic.name,
+                                                  'appId': topic.appId.toString()
+                                                });
+                                          });
+                                        }
+
+                                        for (Lession lession in result.lessions ?? []) {
+                                          headings.add(lession.name);
+                                          subheadings.add(lession.description);
+                                          type.add(MyConsts.chipsText[7]);
+                                          funcs.add(() {
+                                            GoRouter.of(context).pushNamed(
+                                                MyAppRouteConst.iqLearningsRoute,
+                                                pathParameters: {
+                                                  'index': lession.topic.toString(),
+                                                  'title': lession.topicName,
+                                                  'appId': lession.appId.toString()
+                                                });
+                                          });
+                                        }
+
                                         setState(() {});
                                       } else {
                                         debugPrint(response.body);
@@ -258,7 +378,8 @@ class _AppsScreenState extends State<AppsScreen> {
                                               filters: noneSelected
                                                   ? MyConsts.allTrue
                                                   : isSelected,
-                                              isSearch: isSearch));
+                                              isSearch: isSearch)
+                                      );
                                     },
                                   )),
                             )

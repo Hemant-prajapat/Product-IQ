@@ -89,11 +89,12 @@ class _SearchScreenState extends State<SearchScreen> {
                   }
                   final searchUrl =
                       Uri.parse('${MyConsts.baseUrl}/app/search/$value');
-
                   http.Response response = await http.get(searchUrl,
                       headers: MyConsts.requestHeader);
                   final res = jsonDecode(response.body);
+
                   if (response.statusCode == 200) {
+
                     debugPrint(res.toString());
                     final result = SearchResult.fromJson(res);
                     for (Module module in result.modules ?? []) {
